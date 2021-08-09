@@ -115,7 +115,7 @@ class LowonganController extends Controller
     {
         $low = Lowongan::find($lowongan->id);
         $kategori = Kategori::all();
-        $mitra = Mitra::all();
+        $mitra = Mitra::where('user_id', Auth::id())->first();
         $count = $this->countPendaftar();
         return view('mitra.lowongan.edit', compact('low', 'kategori', 'mitra', 'count'));
     }

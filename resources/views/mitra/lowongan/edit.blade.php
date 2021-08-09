@@ -71,14 +71,7 @@ Tambah Lowongan
                                 <input type="text" class="form-control" name="lokasi" value="{{ $low->lokasi }}" />
                             </div>
                             <div class="form-group">
-                                <label>Mitra</label>
-                                <select class="form-control" name="mitra_id">
-                                    <option value="">- Pilih Mitra -</option>
-                                    @foreach ($mitra as $mitra)
-                                    <option value="{{ $mitra->id }}" @if ($low->mitra_id == $mitra->id) selected @endif>{{ $mitra->nama_mitra }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                                <input type="hidden" name="mitra_id" value="{{ $mitra->id }}">
                             <div class="form-group">
                                 <label>Kategori</label>
                                 <select class="form-control" name="kategori_id">
