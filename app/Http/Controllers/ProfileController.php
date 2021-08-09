@@ -183,10 +183,10 @@ class ProfileController extends Controller
                     $user->update([
                         'name' => $request->nama_depart
                     ]);
-                    return redirect()->route('profile.index')->with('success', 'Profle berhasil diubah!');
+                    return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
                     break;
                 } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profle gagal diubah!');
+                    return redirect()->back()->with('error', 'Profile gagal diubah!');
                     break;
                 }
             case '2':
@@ -217,10 +217,10 @@ class ProfileController extends Controller
                     $user->update([
                         'name' => $request->nama_mitra
                     ]);
-                    return redirect()->route('profile.index')-with('success', 'Profle berhasil diubah!');
+                    return redirect()->route('profile.index')-with('success', 'Profile berhasil diubah!');
                     break;
                 } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profle gagal diubah!');
+                    return redirect()->back()->with('error', 'Profile gagal diubah!');
                     break;
                 }
             case '3':
@@ -249,10 +249,10 @@ class ProfileController extends Controller
                     $user->update([
                         'name' => $request->nama_dosen
                     ]);
-                    return redirect()->route('profile.index')-with('success', 'Profle berhasil diubah!');
+                    return redirect()->route('profile.index')-with('success', 'Profile berhasil diubah!');
                     break;
                 } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profle gagal diubah!');
+                    return redirect()->back()->with('error', 'Profile gagal diubah!');
                     break;
                 }
             case '4':
@@ -281,10 +281,10 @@ class ProfileController extends Controller
                     $user->update([
                         'name' => $request->nama_spv
                     ]);
-                    return redirect()->route('profile.index')-with('success', 'Profle berhasil diubah!');
+                    return redirect()->route('profile.index')-with('success', 'Profile berhasil diubah!');
                     break;
                 } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profle gagal diubah!');
+                    return redirect()->back()->with('error', 'Profile gagal diubah!');
                     break;
                 }
             case '5':
@@ -329,10 +329,10 @@ class ProfileController extends Controller
                     $user->update([
                         'name' => $request->nama_mhs
                     ]);
-                    return redirect()->route('profile.index')-with('success', 'Profle berhasil diubah!');
+                    return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
                     break;
                 } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profle gagal diubah!');
+                    return redirect()->back()->with('error', 'Profile gagal diubah!');
                     break;
                 }
         }

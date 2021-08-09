@@ -70,13 +70,7 @@ Tambah Lowongan
                                 <input type="text" class="form-control" name="lokasi" placeholder="Lokasi sesuai Google Maps"/>
                             </div>
                             <div class="form-group">
-                                <label>Mitra</label>
-                                <select class="form-control" name="mitra_id">
-                                    <option value="">- Pilih Mitra -</option>
-                                    @foreach ($mitra as $mitra)
-                                    <option value="{{ $mitra->id }}">{{ $mitra->nama_mitra }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="hidden" class="form-control" name="mitra_id" value="{{ $mitra->id }}">
                             </div>
                             <div class="form-group">
                                 <label>Kategori</label>

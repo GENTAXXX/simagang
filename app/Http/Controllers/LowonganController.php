@@ -46,7 +46,7 @@ class LowonganController extends Controller
     public function create()
     {
         $kategori = Kategori::all();
-        $mitra = Mitra::all();
+        $mitra = Mitra::where('user_id', Auth::id())->first();
         $count = $this->countPendaftar();
         return view('mitra.lowongan.create', compact('mitra', 'kategori', 'count'));
     }

@@ -27,10 +27,10 @@ class DepartController extends Controller
         $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
                 ->where('skill_mhs.mhs_id', $mhs->id)
                 ->select('skill')->get();
-        $data = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        $data = Magang::leftJoin('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->leftJoin('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mhs_id', $mhs->id)
         ->first();
-        // dd($data);
         $count = $this->countPengajuan();
         return view('depart.mhs.show', compact('mhs', 'data', 'count', 'skill'));
     }

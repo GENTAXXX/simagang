@@ -156,7 +156,9 @@ class ApplyController extends Controller
                 ->select('skill')->get();
         $low = Lowongan::find($id);
         $button = 'enable';
-        if ($mhs->NIM == null || $mhs->telepon_mhs == null || $mhs->pengalaman == null || $mhs->jurusan_id == null || $mhs->status_id == null || $mhs->jenis_kelamin == null || $mhs->tgl_lahir == null || $mhs->foto_mhs == null){
+        if ($mhs->NIM == null || $mhs->telepon_mhs == null || $mhs->pengalaman == null || 
+        $mhs->jurusan_id == null || $mhs->status_id == null || $mhs->jenis_kelamin == null || 
+        $mhs->tgl_lahir == null || $mhs->foto_mhs == null){
             $button = 'disabled';
         };
         return view('lowongan.apply', compact('mhs', 'low', 'button', 'skill'));
