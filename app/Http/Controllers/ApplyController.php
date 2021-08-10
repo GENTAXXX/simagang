@@ -76,10 +76,10 @@ class ApplyController extends Controller
 
         $todayDate = date("Y-m-d");
         $count = $this->countPendaftar();
-        if (isset($data->approval) == '3'){
-            $button = 'disabled';
-        };
-        return view('mitra.magang.show', compact('data', 'count', 'skill', 'mhs', 'todayDate', 'button'));
+        // if (isset($data->approval) == '3'){
+        //     $button = 'disabled';
+        // };
+        return view('mitra.magang.show', compact('data', 'count', 'skill', 'mhs', 'todayDate'));
     }
 
     public function listMagang(){

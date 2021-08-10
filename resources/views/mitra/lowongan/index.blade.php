@@ -68,11 +68,11 @@ List Lowongan
                                     <td class="text-center">{{ $low->deskripsi_low }}</td>
                                     <td class="text-center">{{ $low->lokasi }}</td>
                                     <td class="text-center"><span>
-                                            <form action="{{ route('lowongan.destroy', $low->id) }}" method="post">
+                                            <form action="{{ route('lowongan.destroy', $low->id) }}" method="POST">
+                                                <a href="{{ route('lowongan.edit', $low->id) }}" class="btn btn-primary m-2">Ubah</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <a href="{{ route('lowongan.edit', $low->id) }}" class="btn btn-primary m-2">Ubah</a>
-                                                <button type="submit" class="btn btn-danger m-2">Hapus</button>
+                                                <button type="submit" class="btn btn-danger m-2" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                         </span>
                                     </td>
                                 </tr>

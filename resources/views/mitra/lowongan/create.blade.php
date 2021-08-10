@@ -55,7 +55,7 @@ Tambah Lowongan
                             </div>
                             <div class=" form-group">
                                 <label>Deskripsi Lowongan</label>
-                                <textarea class="form-control" name="deskripsi_low" placeholder="Deskripsi Lowongan"></textarea>
+                                <textarea class="form-control" name="deskripsi_low" style="height:150px"placeholder="Deskripsi Lowongan"></textarea>
                             </div>
                             <div class=" form-group">
                                 <label>Jumlah Mahasiswa</label>

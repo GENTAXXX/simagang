@@ -11,12 +11,12 @@ Detail Mahasiswa Magang
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Pendaftar</h1>
+            <h1>Mahasiswa Magang</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="profile-departemen.html">Home</a></li>
-              <li class="breadcrumb-item active">Edit Pendaftar</li>
+              <li class="breadcrumb-item active">Mahasiswa Magang</li>
             </ol>
           </div>
         </div>
@@ -82,7 +82,7 @@ Detail Mahasiswa Magang
                         </div>
                         <div class="card col-md-9">
                             <div class="card-header border-transparent">
-                                <h3 class="card-title">Lamaran Diajukan</h3>
+                                <h3 class="card-title">Informasi Magang</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0">
@@ -90,17 +90,16 @@ Detail Mahasiswa Magang
                                     <table class="table m-0">
                                         <thead>
                                             <tr class="row">
-                                                <th class="col-2">Nomor</th>
-                                                <th class="col-4">Melamar</th>
-                                                <th class="col-4">Asal</th>
+                                                <th class="col-4">Lowongan</th>
+                                                <th class="col-4">Deskripsi</th>
                                                 <th class="col-2">Status</th>
+                                                <th class="col-2">Durasi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="row">
-                                                <td class="col-2">1</td>
                                                 <td class="col-4">{{ $data->nama_low }}</td>
-                                                <td class="col-4">{{ $data->mahasiswa->jurusan['jurusan']}}</td>
+                                                <td class="col-4">{{ $data->deskripsi_low }}</td>
                                                 <td class="col-2">
                                                 @if ($data->approval == 1 && $data->tgl_selesai >= $todayDate )
                                                     <label class="badge badge-success">Magang</label>
@@ -110,17 +109,20 @@ Detail Mahasiswa Magang
                                                     <label class="badge badge-danger">Selesai</label>
                                                 @endif
                                                 </td>
+                                                <td class="col-2">{{ $data->durasi }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="card-body">
+                                    <form action="{{ route('pendaftar.end', $data->magang_id) }}" method="POST">
+                                        @csrf
+                                        @if (isset($data->approval) == 3)
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin mengakhiri magang ini?')"> Akhiri</button>
+                                        @endif
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <form action="{{ route('pendaftar.end', $data->magang_id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="bnt btn-danger" {{ $button }}> Akhiri</button>
-                            </form>
                         </div>
                 </div>
             </div>

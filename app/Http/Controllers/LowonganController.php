@@ -160,7 +160,6 @@ class LowonganController extends Controller
      */
     public function destroy(Lowongan $lowongan)
     {
-        $lowongan = Lowongan::find($lowongan->id);
         try {
             $lowongan->delete();
 
