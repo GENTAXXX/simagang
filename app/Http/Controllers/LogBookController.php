@@ -6,6 +6,7 @@ use App\Models\Logbook;
 use App\Models\Lowongan;
 use App\Models\Magang;
 use App\Models\Mahasiswa;
+use App\Models\SkillMhs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -30,7 +31,10 @@ class LogBookController extends Controller
         $mhs = Mahasiswa::find($id);
         $data = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
         ->where('magang.mhs_id', $mhs->id)->get();
-        return view('spv.logbook.show', compact('data', 'mhs'));
+        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+        ->where('skill_mhs.mhs_id', $mhs->id)
+        ->select('skill')->get();
+        return view('spv.logbook.show', compact('data', 'mhs', 'skill'));
     }
 
     public function mhsLogbook(){

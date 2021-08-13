@@ -58,15 +58,13 @@ class BimbinganController extends Controller
         ->orderBy('magang.approval', 'asc')
         ->groupBy('mahasiswa.nama_mhs')
         ->get();
-        // dd($data);
         $arrFeedback = array();
         foreach($data as $d){
-            if(isset($d->catatan) && isset($d->feedback) && isset($d->tgl_bimbingan)) $arrFeedback[$d->mhs_id] = $d->feedback;
-            if(!isset($d->catatan) && !isset($d->feedback) && !isset($d->tgl_bimbingan)) $arrFeedback[$d->mhs_id] = "Belum ada bimbingan";
-            print($d->feedback);
-            print($d->nama_mhs);
+            if(isset($d->catatan) && isset($d->feedback) && isset($d->tgl_bimbingan)) 
+            $arrFeedback[$d->mhs_id] = $d->feedback;
+            if(!isset($d->catatan) && !isset($d->feedback) && !isset($d->tgl_bimbingan)) 
+            $arrFeedback[$d->mhs_id] = "Belum ada bimbingan";
         }
-        dd($arrFeedback);
         return view('dosen.bimbingan.index', compact('data', 'arrFeedback'));
     }
 

@@ -63,7 +63,9 @@ Detail Logbook Mahasiswa
 
                             <strong><i class="far fa-file-alt mr-1"></i> Skill</strong>
 
-                            <p class="text-muted">{{ $mhs->skill['skill'] }}</p>
+                            @foreach ($skill as $s)
+                                <p class="text-muted">{{ $s->skill }}</p>
+                            @endforeach
 
                             <hr>
 

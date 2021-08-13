@@ -1,7 +1,7 @@
 @extends('spv.layout')
 
 @section('title')
-List Logbook Mahasiswa
+Daftar Logbook Mahasiswa
 @endsection
 
 @section('logbookMhs')
@@ -20,7 +20,7 @@ active
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="profile-departemen.html">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
+                        <li class="breadcrumb-item active">Logbook Mahasiswa</li>
                     </ol>
                 </div>
             </div>
@@ -35,12 +35,12 @@ active
         <div class="card">
 
             <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-valign-middle">
+                <table class="table table-valign-middle">
                     <thead>
                         <tr>
                             <th class="text-center">Nomor</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">Asal</th>
+                            <th class="text-center">Departemen</th>
                             <th class="text-center">Lowongan</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Detail</th>
@@ -56,7 +56,7 @@ active
                             <td class="text-center">{{ $mhs->nama_low }}</td>
                             <td class="text-center">
                                 @if ($mhs->approval == 1)
-                                    <label class="badge badge-primary">Magang</label>
+                                    <label class="badge badge-success">Magang</label>
                                 @elseif ($mhs->approval == 3 )
                                     <label class="badge badge-danger">Selesai</label>
                                 @endif
