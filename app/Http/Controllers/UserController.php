@@ -176,7 +176,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $users = User::find($user->id);
+        $users = User::findOrFail($user->id);
         $users->delete();
         return redirect()->route('users.index')->with('success', 'Post deleted successfully.');
     }

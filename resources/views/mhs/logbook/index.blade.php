@@ -37,7 +37,7 @@ Logbook
                     <div class="row m-3" >
                         <div class="col-sm-2">
                             <a href="detail-lowongan.html">
-                            <img src="{{ asset('assets/img/sim-vertical-black.png') }}" class="img-fluid" alt="">
+                            <img src="{{ asset('images/'.$low->mitra['foto_mitra']) }}" class="img-fluid" alt="">
                             </a>
                         </div>
                         <div class="col-lg-6 pt-4 pt-lg-0">
@@ -102,6 +102,7 @@ Logbook
     </section>
     <section class="content">
         <div class="container-fluid">
+            @if ($low->approval != 3)
             <div class="card card-primary">
                 <div class="card-header border-transparent">
                     <h3 class="card-title">Tambah Logbook</h3>
@@ -134,9 +135,11 @@ Logbook
                     </form>
                 </div>
             </div>
+            @endif
             <a class="btn btn-success" href="{{ route('logbook.print') }}">Print PDF</a>
         </div>
     </section>
+
 </div>
 <script>
 $(document).ready( function () {

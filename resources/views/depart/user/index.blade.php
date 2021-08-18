@@ -67,11 +67,12 @@ Daftar User
                                     <td class="text-center">{{ $user->role['role'] }}</td>
                                     <td class="text-center">
                                         <span>
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary m-2">Ubah</a>
                                             <form action="{{ route('users.destroy', $user->id) }}" method="post">
-                                                @csrf
                                                 @method('DELETE')
-                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary m-2">Ubah</a>
-                                                <button type="submit" class="btn btn-danger m-2">Hapus</button>
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger m-2" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                            </form>
                                         </span>
                                     </td>
                                 </tr>

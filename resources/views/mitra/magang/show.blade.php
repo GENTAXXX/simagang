@@ -89,18 +89,24 @@ Detail Mahasiswa Magang
                                 <div class="table-responsive">
                                     <table class="table m-0">
                                         <thead>
-                                            <tr class="row">
-                                                <th class="col-4">Lowongan</th>
-                                                <th class="col-4">Deskripsi</th>
-                                                <th class="col-2">Status</th>
-                                                <th class="col-2">Durasi</th>
+                                            <tr>
+                                                <th class="text-center">Lowongan</th>
+                                                <th class="text-center">Deskripsi</th>
+                                                <th class="text-center">Durasi</th>
+                                                <th class="text-center">Nilai</th>
+                                                <th class="text-center">Keterangan</th>
+                                                <th class="text-center">Status</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="row">
-                                                <td class="col-4">{{ $data->nama_low }}</td>
-                                                <td class="col-4">{{ $data->deskripsi_low }}</td>
-                                                <td class="col-2">
+                                            <tr>
+                                                <td class="text-center">{{ $data->nama_low }}</td>
+                                                <td class="text-center">{{ $data->deskripsi_low }}</td>
+                                                <td class="text-center">{{ $data->durasi }}</td>
+                                                <td class="text-center">{{ $data->nilai }}</td>
+                                                <td class="text-center">{{ $data->keterangan }}</td>
+                                                <td class="text-center">
                                                 @if ($data->approval == 1 && $data->tgl_selesai >= $todayDate )
                                                     <label class="badge badge-success">Magang</label>
                                                 @elseif ($data->approval == 1 && $data->tgl_selesai <= $todayDate )
@@ -109,7 +115,6 @@ Detail Mahasiswa Magang
                                                     <label class="badge badge-danger">Selesai</label>
                                                 @endif
                                                 </td>
-                                                <td class="col-2">{{ $data->durasi }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -117,7 +122,7 @@ Detail Mahasiswa Magang
                                 <div class="card-body">
                                     <form action="{{ route('pendaftar.end', $data->magang_id) }}" method="POST">
                                         @csrf
-                                        @if (isset($data->approval) == 3)
+                                        @if ($data->approval != 3)
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin mengakhiri magang ini?')"> Akhiri</button>
                                         @endif
                                     </form>

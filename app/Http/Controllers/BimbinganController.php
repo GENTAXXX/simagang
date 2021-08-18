@@ -70,7 +70,11 @@ class BimbinganController extends Controller
 
     public function index()
     {
-        $low = Lowongan::join('magang', 'lowongan.id', '=', 'magang.lowongan_id')->first();
+        $low = Lowongan::join('magang', 'lowongan.id', '=', 'magang.lowongan_id')
+        ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('dosen', 'magang.dosen_id', '=', 'dosen.id')
+        ->where('mahasiswa.user_id', Auth::id())
+        ->first();
         $bimbingan = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->where('mahasiswa.user_id', Auth::id())

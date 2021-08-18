@@ -53,8 +53,11 @@
             <ul>
             <li><a href="{{ route('profile.index') }}">Dashboard</a></li>
             <li><a href="contact">Contact Us</a></li>
-            <li><a href="{{ route('login') }}" ><i class="icofont-logout"></i>Log In</a></li>
-
+            @guest
+                @if (Route::has('login'))
+                <li><a href="{{ route('login') }}" ><i class="icofont-logout"></i>Log In</a></li>
+                @endif
+            @endguest
             </ul>
         </nav><!-- .nav-menu -->
 

@@ -19,7 +19,7 @@ class IsApprove
     public function handle(Request $request, Closure $next)
     {
         $mhs = Mahasiswa::where('user_id', Auth::id())->first();
-        if ($mhs->status_id == '2'){
+        if ($mhs->status_id == '2' || $mhs->status_id == '3'){
             return $next($request);
         }else{
             return redirect()->route('redirect');

@@ -1,7 +1,7 @@
 @extends('spv.layout')
 
 @section('title')
-List Logbook Mahasiswa
+Penilaian Mahasiswa
 @endsection
 
 @section('konteng')

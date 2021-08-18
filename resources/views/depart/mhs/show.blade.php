@@ -88,18 +88,22 @@ Detail Mahasiswa
                         <div class="table-responsive">
                             <table class="table m-0">
                                 <thead>
-                                    <tr class="row">
-                                        <th class="col-4">Lowongan</th>
-                                        <th class="col-4">Mitra</th>
-                                        <th class="col-2">Status</th>
+                                    <tr>
+                                        <th class="text-center">Lowongan</th>
+                                        <th class="text-center">Mitra</th>
+                                        <th class="text-center">Nilai</th>
+                                        <th class="text-center">Keterangan</th>
+                                        <th class="text-center">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if (isset($data->nama_low))
-                                    <tr class="row">
-                                        <td class="col-4">{{ $data->nama_low }}</td>
-                                        <td class="col-4">{{ $data->nama_mitra }}</td>
-                                        <td class="col-2">
+                                    <tr>
+                                        <td class="text-center">{{ $data->nama_low }}</td>
+                                        <td class="text-center">{{ $data->nama_mitra }}</td>
+                                        <td class="text-center">{{ $data->nilai }}</td>
+                                        <td class="text-center">{{ $data->keterangan }}</td>
+                                        <td class="text-center">
                                         @if ($mhs->status_id == 1)
                                             <label class="badge">Belum Magang</label>
                                         @elseif ($mhs->status_id == 2)

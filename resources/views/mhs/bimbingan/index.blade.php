@@ -12,7 +12,7 @@ Bimbingan
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Log Book</h1>
+                    <h1 class="m-0">Bimbingan</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -37,7 +37,7 @@ Bimbingan
                     <div class="row m-3" >
                         <div class="col-sm-2">
                             <a href="detail-lowongan.html">
-                            <img src="{{ asset('assets/img/sim-vertical-black.png') }}" class="img-fluid" alt="">
+                            <img src="{{ asset('images/'.$low->mitra['foto_mitra']) }}" class="img-fluid" alt="">
                             </a>
                         </div>
                         <div class="col-lg-6 pt-4 pt-lg-0">
@@ -100,6 +100,7 @@ Bimbingan
             </div>
         </div>
     </section>
+    @if ($low->approval != 3)
     <section class="content">
         <div class="container-fluid">
             <div class="card card-primary">
@@ -132,6 +133,7 @@ Bimbingan
             </div>
         </div>
     </section>
+    @endif
 </div>
 <script>
 $(document).ready( function () {

@@ -158,14 +158,16 @@ class LowonganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lowongan $lowongan)
+    public function destroy($id)
     {
-        try {
-            $lowongan->delete();
+       
+        $low = Lowongan::find($id);
 
-            return redirect()->back()->with('success', 'Lowongan berhasil dihapus!');
-        } catch (\Exception $e){
-            return redirect()->back()->with('error', 'Lowongan gagal dihapus!');
+        if(!isset($low)){
+            return redirect()->back()->with('error', 'Lowongan tidak ada');
         }
+        $low->delete();
+        return redirect()->back()->with('success', 'Lowongan berhasil dihapus!');
+        
     }
 }
