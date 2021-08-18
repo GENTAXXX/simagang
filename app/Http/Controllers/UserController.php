@@ -174,10 +174,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $users = User::findOrFail($user->id);
-        $users->delete();
-        return redirect()->route('users.index')->with('success', 'Post deleted successfully.');
+        $user = User::find($id);
+
+        if(!isset($user)){
+            return redirect()->back()->with('error', 'User tidak ada');
+        }
+        $user->delete();
+        return redirect()->back()->with('success', 'User berhasil dihapus!');
     }
 }
