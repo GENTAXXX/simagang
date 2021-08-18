@@ -157,13 +157,8 @@ class UserController extends Controller
             'name' => 'required',
             'role_id' => 'required',
             'email' => 'required',
-            'password' => 'required',
         ]);
-
-        $request = new Request($request->all());
-        $request->merge([
-            'password' => Hash::make($request->password)
-        ]);
+        
         $user->update($request->all());
         return redirect()->route('users.index')->with('success', 'Akun berhasil diubah!');
     }

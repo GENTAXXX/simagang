@@ -69,10 +69,12 @@ Edit User
                                 </select>
 
                             </div>
+                            @if ($user->role_id == 1)
                             <div class="form-group">
                                 <label>Password:</label>
                                 <input type="password" class="form-control" name="password" value="{{ $user->password }}" />
                             </div>
+                            @endif
                         </div>
                         <!-- /.card-body -->
 
