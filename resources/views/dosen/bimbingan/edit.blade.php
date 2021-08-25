@@ -149,7 +149,7 @@ Detail Bimbingan Mahasiswa
                                         </td>
                                         <td>{{ $bim->feedback }}</td>
                                         <td>
-                                            @if (!isset($data->feedback))
+                                            @if (!isset($bim->feedback))
                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-{{ $bim->bim_id }}" data-id="{{ $bim->bim_id }}">Unggah</button>
                                             @endif
                                             <div class="modal fade" id="exampleModalCenter-{{ $bim->bim_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
