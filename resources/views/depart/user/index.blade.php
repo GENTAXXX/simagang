@@ -35,7 +35,7 @@ Daftar User
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">User Dibuat</h3>
+                    <h3 class="card-title">Daftar User</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -45,9 +45,9 @@ Daftar User
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body p-6">
                     <div class="table-responsive">
-                        <table class="table m-0">
+                        <table id="akun" class="table m-0">
                             <thead>
                                 <tr>
                                     <th class="text-center">Nomor</th>
@@ -67,8 +67,8 @@ Daftar User
                                     <td class="text-center">{{ $user->role['role'] }}</td>
                                     <td class="text-center">
                                         <span>
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary m-2">Ubah</a>
-                                            <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary m-2">Ubah</a>
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger m-2" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
@@ -85,4 +85,9 @@ Daftar User
         </div>
     </section>
 </div>
+<script>
+$(document).ready( function () {
+    $('#akun').DataTable();
+} );
+</script>
 @endsection

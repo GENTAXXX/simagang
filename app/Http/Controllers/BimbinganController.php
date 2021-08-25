@@ -107,7 +107,7 @@ class BimbinganController extends Controller
         $request->validate([
             'catatan' => 'required',
             'tgl_bimbingan' => 'required',
-            'file' => 'required'
+            'file' => 'required',
         ]);
 
         $fileName = 'Bimbingan' . $request->tgl_bimbingan . time() . '.' . $request->file->extension();
@@ -118,9 +118,8 @@ class BimbinganController extends Controller
                 'catatan' => $request->catatan,
                 'tgl_bimbingan' => $request->tgl_bimbingan,
                 'file' => $fileName,
-                'magang_id' => $magang->id
+                'magang_id' => $magang->id,
             ]);
-    
             return redirect()->back()->with('success', 'Bimbingan berhasil ditambahkan!');
         } catch (\Exception $e){
             return redirect()->back()->with('error', 'Bimbingan gagal ditambahkan!');

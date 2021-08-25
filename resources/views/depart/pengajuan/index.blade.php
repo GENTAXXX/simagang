@@ -31,7 +31,7 @@ List Pengajuan
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">Lowongan Dibuat</h3>
+                    <h3 class="card-title">Daftar Pengajuan</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">

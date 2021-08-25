@@ -47,9 +47,9 @@ List Lowongan
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body p-6">
                     <div class="table-responsive">
-                        <table class="table m-0">
+                        <table id="lowongan" class="table m-0">
                             <thead>
                                 <tr>
                                     <th class="text-center">Nomor</th>
@@ -68,8 +68,8 @@ List Lowongan
                                     <td class="text-center">{{ $low->deskripsi_low }}</td>
                                     <td class="text-center">{{ $low->lokasi }}</td>
                                     <td class="text-center"><span>
-                                            <a href="{{ route('lowongan.edit', $low->id) }}" class="btn btn-primary m-2">Ubah</a>
                                             <form action="{{ route('lowongan.destroy', $low->id) }}" method="POST">
+                                                <a href="{{ route('lowongan.edit', $low->id) }}" class="btn btn-primary m-2">Ubah</a>
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger m-2" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
@@ -86,4 +86,9 @@ List Lowongan
         </div>
     </section>
 </div>
+<script>
+$(document).ready( function () {
+    $('#lowongan').DataTable();
+} );
+</script>
 @endsection

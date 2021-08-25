@@ -132,7 +132,7 @@ Detail Bimbingan Mahasiswa
                                         <th>Nomor</th>
                                         <th>Tanggal</th>
                                         <th>Catatan</th>
-                                        <th>Berkas lampiran</th>
+                                        <th>File Bimbingan</th>
                                         <th>Feedback</th>
                                         <th>Aksi</th>
                                     </tr>

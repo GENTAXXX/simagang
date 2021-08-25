@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = User::all();
+        $user = User::orderBy('role_id', 'asc')->get();
         $count = $this->countPengajuan();
         return view('depart.user.index', compact('user', 'count'));
     }
