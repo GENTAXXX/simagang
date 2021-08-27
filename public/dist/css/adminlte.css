@@ -11878,7 +11878,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 [class*="sidebar-dark"] .user-panel {
-  border-bottom: 1px solid #4f5962;
+  border-bottom: 1px solid #f3f6f8;
 }
 
 [class*="sidebar-light"] .user-panel {
@@ -21981,12 +21981,11 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 }
 
 .profile-user-img {
-  
+   
   margin: 0 auto;
   padding: 3px;
   width: 100px;
-  height: 100px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .profile-username {

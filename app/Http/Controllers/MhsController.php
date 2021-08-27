@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bimbingan;
+use App\Models\Logbook;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Models\SkillMhs;
+use App\Models\Magang;
 use Illuminate\Support\Facades\Auth;
 
 class MhsController extends Controller
@@ -17,11 +20,34 @@ class MhsController extends Controller
     public function mahasiswaHome()
     {
         $mhs = Mahasiswa::where("user_id", Auth::id())->first();
-        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
-        ->where('skill_mhs.mhs_id', $mhs->id)
-        ->select('skill')
+        $ajukan = $this->countAjukan();
+        $log = $this->countLogbook();
+        $bim = $this->countBimbingan();
+        return view('mhs.home', compact('mhs', 'ajukan', 'log', 'bim'));
+    }
+
+    public function countAjukan(){
+        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->where('mahasiswa.user_id', Auth::id())
         ->get();
-        return view('mhs.home', compact('mhs', 'skill'));
+        return $data->count();
+    }
+
+    public function countLogbook(){
+        $data = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
+        ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->where('mahasiswa.user_id', Auth::id())
+        ->get();
+        return $data->count();
+    }
+
+    public function countBimbingan(){
+        $data = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
+        ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->where('mahasiswa.user_id', Auth::id())
+        ->get();
+        return $data->count();
     }
     
     public function index()

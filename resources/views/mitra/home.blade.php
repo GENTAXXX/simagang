@@ -1,10 +1,11 @@
 @extends('mitra.layout')
 
 @section('title')
-Home
+Dashboard
 @endsection
 
 @section('konteng')
+ <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -15,70 +16,91 @@ Home
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('mitra.home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
+                        <li class="breadcrumb-item active">Home</li>
                     </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
-    </section>
+        </section>
 
-    <!-- Main content -->
-    <section class="content ">
+        <!-- Main content -->
+        <section class="content ">
         <div class="container ">
             <div class="row">
-                <div class="col-lg-12 d-flex justify-content-center">
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $mag }}</h3>
 
-                    <!-- Profile Image -->
-                    <div class="card card-primary card-outline">
-                        <div class="card-body box-profile">
-                            <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$mitra->foto_mitra) }}" alt="User profile picture">
-                            </div>
-
-                            <h3 class="profile-username text-center">{{ $mitra->nama_mitra }}</h3>
-
-                            <p class="text-muted text-center">{{ Auth::user()->email }}</p>
-                            <strong><i class="fas fa-book mr-1"></i> Alamat</strong>
-
-                            <p class="text-muted">{{ $mitra->alamat_mitra }}</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
-
-                            <p class="text-muted">{{ $mitra->telepon_mitra }}</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-mail-bulk mr-1"></i> Fax</strong>
-
-                            <p class="text-muted">{{ $mitra->fax_mitra }}</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-pencil-alt mr-1"></i> Kabupaten</strong>
-
-                            <p class="text-muted"> {{ $mitra->kabupaten['nama'] }}
-                            </p>
-                        </div>
-                        <div class="form-group row">
-                            <div class="offset-sm-5 ">
-                                <a class="btn btn-danger" href="{{ route('profile.edit', $mitra->id) }}">
-                                    Ubah
-                                </a>
-                            </div>
-                        </div>
+                        <p>Mahasiswa Magang</p>
                     </div>
-                    <!-- /.card-body -->
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <a href="{{ route('magang.index') }}" class="small-box-footer">
+                        Lihat <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ $low }}</h3>
 
+                        <p>Lowongan dibuat</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <a href="{{ route('lowongan.index') }}" class="small-box-footer">
+                        Lihat<i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ $count }}</h3>
+
+                    <p>Pendaftar</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <a href="{{ route('pendaftar.index') }}" class="small-box-footer">
+                    lihat <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-secondary">
+                    <div class="inner">
+                        <h3>{{ $full }}</h3>
+
+                        <p>Lowongan terpenuhi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <a href="{{ route('lowongan.index') }}" class="small-box-footer">
+                        Lihat <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
             </div>
             <!-- /.col -->
-
+            
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>
+ <!-- /.content-wrapper -->
 @endsection

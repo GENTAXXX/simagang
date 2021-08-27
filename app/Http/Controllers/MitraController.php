@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lowongan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Magang;
@@ -25,7 +26,36 @@ class MitraController extends Controller
     {
         $mitra = Mitra::where("user_id", Auth::id())->first();
         $count = $this->countPendaftar();
-        return view('mitra.home', compact('mitra', 'count'));
+        $low = $this->countLowongan();
+        $mag = $this->countMag();
+        $full = $this->countLowFull();
+        return view('mitra.home', compact('mitra', 'count', 'low', 'mag', 'full'));
+    }
+
+    public function countLowongan(){
+        $mitra = Mitra::where("user_id", Auth::id())->first();
+        $low = Lowongan::where("mitra_id", $mitra->id)
+        ->get();
+        return $low->count();
+    }
+
+    public function countMag(){
+        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
+        ->where('mitra.user_id', Auth::id())
+        ->where('approval', '!=', '2')
+        ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
+        ->get();
+        return $data->count();
+    }
+
+    public function countLowFull(){
+        $mitra = Mitra::where("user_id", Auth::id())->first();
+        $data = Lowongan::where("mitra_id", $mitra->id)
+        ->where('jumlah_mhs', '0')
+        ->get();
+        return $data->count();
     }
 
     public function index()

@@ -7,6 +7,8 @@ use App\Models\Departemen;
 use App\Models\Mahasiswa;
 use App\Models\Magang;
 use App\Models\SkillMhs;
+use App\Models\Supervisor;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DepartController extends Controller
@@ -49,7 +51,55 @@ class DepartController extends Controller
     {
         $depart = Departemen::where("user_id", Auth::id())->first();
         $count = $this->countPengajuan();
-        return view('depart.home', compact('depart', 'count'));
+        $user = $this->countUser();
+        $mitra = $this->countMitra();
+        $spv = $this->countSpv();
+        $dosen = $this->countDosen();
+        $mhs = $this->countMhs();
+        $mhsMag = $this->countMhsMagang();
+        $blmMag = $this->countBelumMagang();
+        return view('depart.home', compact('depart', 'count', 'user', 'mitra', 'spv', 'dosen', 'mhs', 'mhsMag', 'blmMag'));
+    }
+
+    public function countUser(){
+        $data = User::all();
+        return $data->count();
+    }
+
+    public function countMitra(){
+        $data = User::where('role_id', '2')
+        ->get();
+        return $data->count();
+    }
+
+    public function countSpv(){
+        $data = User::where('role_id', '4')
+        ->get();
+        return $data->count();
+    }
+
+    public function countDosen(){
+        $data = User::where('role_id', '3')
+        ->get();
+        return $data->count();
+    }
+
+    public function countMhs(){
+        $data = User::where('role_id', '5')
+        ->get();
+        return $data->count();
+    }
+
+    public function countMhsMagang(){
+        $data = Mahasiswa::where('status_id', '2')
+        ->get();
+        return $data->count();
+    }
+
+    public function countBelumMagang(){
+        $data = Mahasiswa::where('status_id', '1')
+        ->get();
+        return $data->count();
     }
 
     public function index()

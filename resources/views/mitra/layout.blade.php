@@ -73,13 +73,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item">
                             <a href="{{ route('pendaftar.index') }}" class="nav-link @if(Route::is('pendaftar.index')) {{ 'active' }} @endif">
                                 <i class="far fa-copy nav-icon"></i>
-                                <p>Pendaftar <span class="badge">{{ $count }}</span></p>
+                                <p>Pendaftar</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('magang.index') }}" class="nav-link @if(Route::is('magang.index')) {{ 'active' }} @endif">
                             <i class="nav-icon fas fa-user"></i>
-                            <p>Mahasiswa Magang</p>
+                            <p>Magang</p>
                             </a>
                         </li>
                         <li class="nav-item">

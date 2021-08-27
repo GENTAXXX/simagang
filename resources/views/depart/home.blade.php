@@ -1,7 +1,7 @@
 @extends('depart.layout')
 
 @section('title')
-Home
+Dashboard
 @endsection
 
 @section('konteng')
@@ -11,65 +11,160 @@ Home
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Profile</h1>
+                    <h1>Beranda</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('mitra.home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
+                    <li class="breadcrumb-item active">Beranda</li>
                     </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
-    </section>
+        </section>
 
-    <!-- Main content -->
-    <section class="content ">
+        <!-- Main content -->
+        <section class="content ">
         <div class="container ">
             <div class="row">
-                <div class="col-lg-12 d-flex justify-content-center">
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-dark">
+                <div class="inner">
+                    <h3>{{ $user }}</h3>
 
-                    <!-- Profile Image -->
-                    <div class="card card-primary card-outline">
-                        <div class="card-body box-profile">
-                            <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$depart->foto_depart) }}" alt="User profile picture">
-                            </div>
-
-                            <h3 class="profile-username text-center">{{ $depart->nama_depart }}</h3>
-
-                            <p class="text-muted text-center">{{ Auth::user()->email }}</p>
-                            <strong><i class="fas fa-book mr-1"></i> Alamat</strong>
-
-                            <p class="text-muted">{{ $depart->alamat_depart }}</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
-
-                            <p class="text-muted">{{ $depart->telepon_depart }}</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-mail-bulk mr-1"></i> NIDN</strong>
-
-                            <p class="text-muted">{{ $depart->NIDN }}</p>
-
-                        </div>
-                        <div class="form-group row">
-                            <div class="offset-sm-5 ">
-                                <a class="btn btn-danger" href="{{ route('profile.edit', $depart->id) }}">
-                                    Ubah
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
+                    <p>Akun dibuat</p>
                 </div>
+                <div class="icon">
+                    <i class="fas fa-crwat"></i>
+                </div>
+                <a href="{{ route('users.index') }}" class="small-box-footer">
+                    Lihat <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-fuchsia">
+                <div class="inner">
+                    <h3>{{ $mitra }}</h3>
 
+                    <p>Jumlah Mitra</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <a href="{{ route('users.index') }}" class="small-box-footer">
+                    Lihat <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-navy">
+                <div class="inner">
+                    <h3>{{ $spv }}</h3>
+
+                    <p>Jumlah Supervisor</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <a href="{{ route('users.index') }}" class="small-box-footer">
+                    Lihat <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-secondary">
+                <div class="inner">
+                    <h3>{{ $dosen }}</h3>
+
+                    <p>Jumlah Dosen</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <a href="{{ route('users.index') }}" class="small-box-footer">
+                    Lihat <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $mhs }}</h3>
+
+                    <p>Jumlah Mahasiswa</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <a href="{{ route('users.index') }}" class="small-box-footer">
+                    Lihat <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{ $mhsMag }}</h3>
+
+                    <p>Mahasiswa Magang</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <a href="{{ route('depart.mhs') }}" class="small-box-footer">
+                    Lihat<i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ $count }}</h3>
+
+                    <p>Mahasiswa Mengajukan</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-exclamation"></i>
+                </div>
+                <a href="{{ route('pengajuan.index') }}" class="small-box-footer">
+                    lihat <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small card -->
+                <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{ $blmMag }}</h3>
+
+                    <p>Belum Magang</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-times"></i>
+                </div>
+                <a href="{{ route('depart.mhs') }}" class="small-box-footer">
+                    Lihat <i class="fas fa-arrow-circle-right"></i>
+                </a>
+                </div>
+            </div>
+            <!-- ./col -->
             </div>
             <!-- /.col -->
-
+            
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>

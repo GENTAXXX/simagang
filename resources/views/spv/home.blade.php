@@ -1,7 +1,7 @@
 @extends('spv.layout')
 
 @section('title')
-Home
+Dashboard
 @endsection
 
 @section('konteng')
@@ -11,12 +11,11 @@ Home
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Profile</h1>
+                    <h1>Beranda</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('mitra.home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">User Profile</li>
+                    <li class="breadcrumb-item active">Beranda</li>
                     </ol>
                 </div>
             </div>
@@ -27,50 +26,42 @@ Home
     <section class="content ">
         <div class="container ">
             <div class="row">
-                <div class="col-lg-12 d-flex justify-content-center">
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $mhsLogbook }}</h3>
 
-                    <!-- Profile Image -->
-                    <div class="card card-primary card-outline">
-                        <div class="card-body box-profile">
-                            <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$spv->foto_spv) }}" alt="User profile picture">
-                            </div>
-
-                            <h3 class="profile-username text-center">{{ $spv->nama_spv }}</h3>
-
-                            <p class="text-muted text-center">{{ Auth::user()->email }}</p>
-
-                            <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
-
-                            <p class="text-muted">{{ $spv->telepon_spv }}</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-mail-bulk mr-1"></i> No. Pegawai</strong>
-
-                            <p class="text-muted">{{ $spv->no_pegawai }}</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-mail-bulk mr-1"></i> Mitra</strong>
-
-                            <p class="text-muted">{{ $spv->mitra['nama_mitra'] }}</p>
-
+                            <p>Mahasiswa Magang</p>
                         </div>
-                        <div class="form-group row">
-                            <div class="offset-sm-5 ">
-                                <a class="btn btn-danger" href="{{ route('profile.edit', $spv->id) }}">
-                                    Ubah
-                                </a>
-                            </div>
+                        <div class="icon">
+                            <i class="fas fa-arrow-alt-circle-up"></i>
                         </div>
+                        <a href="{{ route('spv.index') }}l" class="small-box-footer">
+                            Lihat <i class="fas fa-arrow-circle-right"></i>
+                        </a>
                     </div>
-                    <!-- /.card-body -->
                 </div>
+            <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small card -->
+                    <div class="small-box bg-navy">
+                        <div class="inner">
+                            <h3>{{ $nilai }}</h3>
 
+                            <p>Penilaian</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <a href="{{ route('spv.penilaian') }}" class="small-box-footer">
+                            Lihat <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
             <!-- /.col -->
-
+            
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>

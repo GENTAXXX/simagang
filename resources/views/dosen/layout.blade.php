@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="dashboard-mahasiswa.html" class="">
-                <img src="{{ asset('assets/img/sim-horizontal-white.png') }}" alt="" class="e " style="height: 75px;">
+                <img src="{{ asset('assets/img/sim-white.png') }}" alt="" class="m-4" style="height: 75px;">
 
             </a>
 
@@ -75,7 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item">
                                     <a href="{{ route('dospem.index') }}" class="nav-link @if(Route::is('dospem.index')) {{ 'active' }} @endif">
                                     <i class="far fa-copy nav-icon"></i>
-                                    <p>Bimbingan Mahasiswa</p>
+                                    <p>Bimbingan</p>
                                     </a>
                                 </li>
                             </ul>

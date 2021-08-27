@@ -47,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <aside class="main-sidebar sidebar-dark-primary elevation-1">
         <!-- Brand Logo -->
             <a href="profile.html" class="">
-                <img src="{{ asset('assets/img/sim-green.png') }}" alt="" class="m-4 " style="height: 75px;">
+                <img src="{{ asset('assets/img/sim-white.png') }}" alt="" class="m-4 " style="height: 75px;">
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -87,8 +87,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('pengajuan.index') }}" class="nav-link @if(Route::is('pengajuan.index')) {{ 'active' }} @endif">
-                                        <i class="fa fa-graduation-cap nav-icon"></i>
-                                        <p>Pengajuan <span class="badge badge-primary">{{ $count }}</span></p>
+                                        <i class="far fa-list-alt nav-icon"></i>
+                                        <p>Pengajuan</p>
                                     </a>
                                 </li>
                             </ul>
