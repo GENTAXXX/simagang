@@ -16,7 +16,7 @@ class CreateDepartemenTable extends Migration
         Schema::create('departemen', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id')->unsigned();
-            $table->string('nama_depart')->unique();
+            $table->string('nama_depart');
             $table->string('alamat_depart')->nullable();
             $table->string('telepon_depart')->nullable();
             $table->integer('NIDN')->nullable();

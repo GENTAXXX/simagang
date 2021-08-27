@@ -15,11 +15,11 @@ class CreateLogbookTable extends Migration
     {
         Schema::create('logbook', function (Blueprint $table) {
             $table->id('id');
-            $table->date('tanggal')->nullable();
-            $table->string('kegiatan')->nullable();
-            $table->string('deskripsi_log')->nullable();
+            $table->date('tanggal');
+            $table->string('kegiatan');
+            $table->string('deskripsi_log');
             $table->string('saran')->nullable();
-            $table->unsignedBigInteger('magang_id')->nullable();
+            $table->unsignedBigInteger('magang_id');
             $table->timestamps();
         });
 

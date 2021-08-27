@@ -15,8 +15,8 @@ class CreateSkillMhsTable extends Migration
     {
         Schema::create('skill_mhs', function (Blueprint $table) {
             $table->id('id');
-            $table->unsignedBigInteger('skill_id')->nullable();
-            $table->unsignedBigInteger('mhs_id')->nullable();
+            $table->unsignedBigInteger('skill_id');
+            $table->unsignedBigInteger('mhs_id');
             $table->timestamps();
         });
 

@@ -16,10 +16,11 @@ class CreateSupervisorTable extends Migration
         Schema::create('supervisor', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('nama_spv')->unique();
+            $table->string('nama_spv');
             $table->string('telepon_spv')->nullable();
             $table->integer('no_pegawai')->nullable();
             $table->string('foto_spv')->nullable()->default('avatar.png');
+            $table->enum('jenis_kelamin',['Laki-laki','Perempuan'])->nullable();
             $table->unsignedBigInteger('mitra_id')->nullable();
             $table->timestamps();
         });
