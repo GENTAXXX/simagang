@@ -32,7 +32,7 @@ Dashboard
                     <div class="inner">
                         <h3>{{ $mhsBim }}</h3>
 
-                        <p>Mahasiswa magang</p>
+                        <p>Mahasiswa bimbingan</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-user"></i>

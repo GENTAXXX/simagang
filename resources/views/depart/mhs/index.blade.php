@@ -30,8 +30,8 @@ Daftar Mahasiswa
     <section class="content">
         <div class="card">
 
-            <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-valign-middle">
+            <div class="card-body table-responsive p-6">
+                <table id="mhs" class="table table-striped table-valign-middle">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
@@ -72,4 +72,9 @@ Daftar Mahasiswa
         </div>
     </section>
 </div>
+<script>
+$(document).ready( function () {
+    $('#mhs').DataTable();
+} );
+</script>
 @endsection

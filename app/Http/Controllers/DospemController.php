@@ -26,11 +26,10 @@ class DospemController extends Controller
 
     public function countMhsBim(){
         $data = Mahasiswa::join('magang', 'mahasiswa.id', '=', 'magang.mhs_id')
-        ->leftJoin('bimbingan', 'magang.id', '=', 'bimbingan.magang_id')
         ->join('dosen', 'magang.dosen_id', '=', 'dosen.id')
         ->where('dosen.user_id', Auth::id())
         ->where('magang.approval', '!=', '2')
-        ->select('mahasiswa.*', 'magang.*', 'dosen.*', 'mahasiswa.id as mhs_id', 'bimbingan.*')
+        ->select('mahasiswa.*', 'magang.*', 'dosen.*', 'mahasiswa.id as mhs_id')
         ->orderBy('magang.approval', 'asc')
         ->get();
         return $data->count();

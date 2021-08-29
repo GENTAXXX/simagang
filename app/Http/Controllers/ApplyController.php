@@ -75,8 +75,7 @@ class ApplyController extends Controller
                 ->select('skill')->get();
 
         $todayDate = date("Y-m-d");
-        $count = $this->countPendaftar();
-        return view('mitra.magang.show', compact('data', 'count', 'skill', 'mhs', 'todayDate'));
+        return view('mitra.magang.show', compact('data', 'skill', 'mhs', 'todayDate'));
     }
 
     public function listMagang(){
@@ -88,8 +87,7 @@ class ApplyController extends Controller
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
         ->get();
         $todayDate = date("Y-m-d");
-        $count = $this->countPendaftar();
-        return view('mitra.magang.index', compact('data', 'count', 'todayDate'));
+        return view('mitra.magang.index', compact('data', 'todayDate'));
     }
 
     public function listPendaftar(){
@@ -240,7 +238,7 @@ class ApplyController extends Controller
     public function reject($id){
         $magang = Magang::find($id);
         $magang->update([
-            'approval' => '0'
+            'approval' => '2'
         ]);
         return redirect()->route('pendaftar.index');
     }
@@ -272,10 +270,17 @@ class ApplyController extends Controller
                 $mgn->update([
                     'approval' => '2'
                 ]);
+
+                return redirect()->route('pendaftar.index')->with('success','Mahasiswa berhasil diterima!');
             } else {
                 $this->reject($id);
+                $mhs = Mahasiswa::find($magang->mhs_id);
+                $mhs->update([
+                    'status_id' => '1'
+                ]);
+                
+                return redirect()->route('pendaftar.index')->with('success','Mahasiswa berhasil ditolak!');
             }
-            return redirect()->route('pendaftar.index')->with('success','Mahasiswa berhasil diterima!');
         } catch (\Exception $e){
             return redirect()->back()->with('error','Ada kolom yang belum diisi!');
         }

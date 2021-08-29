@@ -16,8 +16,7 @@ class MitraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function countPendaftar(){
-        $data = Magang::whereNull('spv_id')
-        ->whereNotNull('dosen_id')
+        $data = Magang::where('approval', '0')
         ->get();
         return $data->count();
     }
