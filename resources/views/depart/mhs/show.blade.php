@@ -94,6 +94,7 @@ Detail Mahasiswa
                                         <th class="text-center">Nilai</th>
                                         <th class="text-center">Keterangan</th>
                                         <th class="text-center">Status</th>
+                                        <th class="text-center">Tanggal Selesai</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,6 +115,7 @@ Detail Mahasiswa
                                             <label class="badge badge-warning">Sedang Mengajukan</label>
                                         @endif
                                         </td>
+                                        <td class="text-center">{{ $data->updated_at }}</td>
                                     </tr>
                                     @endif
                                 </tbody>

@@ -16,10 +16,6 @@ class LowonganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function countPendaftar(){
-        $data = Magang::where('spv_id', null)->get();
-        return $data->count();
-    }
 
     public function AllLowongan(Request $request){
         $cari = $request->cari;
@@ -34,8 +30,7 @@ class LowonganController extends Controller
         $idUserLogin = Auth::id();
         $mitra = Mitra::where("user_id", $idUserLogin)->first();
         $low = Lowongan::where("mitra_id", $mitra->id)->get();
-        $count = $this->countPendaftar();
-        return view('mitra.lowongan.index', compact('low', 'count'));
+        return view('mitra.lowongan.index', compact('low'));
     }
 
     /**
@@ -47,8 +42,7 @@ class LowonganController extends Controller
     {
         $kategori = Kategori::all();
         $mitra = Mitra::where('user_id', Auth::id())->first();
-        $count = $this->countPendaftar();
-        return view('mitra.lowongan.create', compact('mitra', 'kategori', 'count'));
+        return view('mitra.lowongan.create', compact('mitra', 'kategori'));
     }
 
     /**
@@ -116,8 +110,7 @@ class LowonganController extends Controller
         $low = Lowongan::find($lowongan->id);
         $kategori = Kategori::all();
         $mitra = Mitra::where('user_id', Auth::id())->first();
-        $count = $this->countPendaftar();
-        return view('mitra.lowongan.edit', compact('low', 'kategori', 'mitra', 'count'));
+        return view('mitra.lowongan.edit', compact('low', 'kategori', 'mitra'));
     }
 
     /**
@@ -138,11 +131,7 @@ class LowonganController extends Controller
             'mitra_id' => 'required',
             'kategori_id' => 'required',
             'lokasi' => 'required',
-            'foto_low' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        $imageName = $request->nama_low . '.' . $request->foto_low->extension();
-        $request->foto_low->move(public_path('images'), $imageName);
 
         try {
             $lowongan->update($request->all());

@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="dashboard-mahasiswa.html" class="">
+            <a href="{{ url('/') }}" class="">
                 <img src="{{ asset('assets/img/sim-white.png') }}" alt="" class="m-4" style="height: 75px;"> 
             </a>
             <!-- Sidebar -->

@@ -84,15 +84,17 @@ Bimbingan
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
-                                @foreach ($bimbingan as $log)
+                                @foreach ($bimbingan as $bim)
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
-                                    <td class="text-center">{{ $log['tgl_bimbingan'] }}</td>
-                                    <td class="text-center">{{ $log['catatan'] }}</td>
-                                    <td class="text-center">{{ $log['file'] }}</td>
-                                    <td class="text-center">{{ $log['feedback'] }}</td>
+                                    <td class="text-center">{{ $bim['tgl_bimbingan'] }}</td>
+                                    <td class="text-center">{{ $bim['catatan'] }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ asset('file/'.$bim->file) }}" class="btn btn-primary btn-file">Unduh</a> 
+                                    </td>
+                                    <td class="text-center">{{ $bim['feedback'] }}</td>
                                 </tr>
-                                @endforeach
+                                @endforeach 
                             </tbody>
                         </table>
                     </div>

@@ -85,10 +85,6 @@ Tambah Lowongan
                                 <label>Telepon</label>
                                 <input type="number" class="form-control" name="telepon_low" value="{{ $low->telepon_low }}" />
                             </div>
-                            <div class="form-group">
-                                <label>Foto</label>
-                                <input type="file" class="form-control" name="foto_low" value="{{ $low->foto_low }}" />
-                            </div>
                         </div>
                         <!-- /.card-body -->
 
