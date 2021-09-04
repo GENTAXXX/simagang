@@ -87,10 +87,10 @@ Logbook
                                 @foreach ($logs as $log)
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
-                                    <td class="text-center">{{ $log['tanggal'] }}</td>
-                                    <td class="text-center">{{ $log['kegiatan'] }}</td>
-                                    <td class="text-center">{{ $log['deskripsi_log'] }}</td>
-                                    <td class="text-center">{{ $log['saran'] }}</td>
+                                    <td class="text-center">{{ $log->tanggal }}</td>
+                                    <td class="text-center">{{ $log->kegiatan }}</td>
+                                    <td class="text-center">{{ $log->deskripsi_log }}</td>
+                                    <td class="text-center">{{ $log->saran }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                    <img src="{{ asset('dist/img/user8-128x128.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ asset('images/.Auth::user()->name') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                     <a href="{{ url('profile') }}" class="d-block">{{ Auth::user()->name }}</a>

@@ -28,8 +28,8 @@ class CreateLowonganTable extends Migration
         });
 
         Schema::table('lowongan', function ($table) {
-            $table->foreign('mitra_id')->references('id')->on('mitra');
-            $table->foreign('kategori_id')->references('id')->on('kategori');
+            $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('cascade');
+            $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');
         });
     }
 

@@ -84,9 +84,8 @@ Profile Mahasiswa
                                     <div class="form-group">
                                         <label for="skill_id">Skill:</label>
                                         <select id="skillMhs" name="skill_id[]" class="form-control" multiple>
-                                            <option value="">- Pilih Skill -</option>
                                             @foreach($skill as $skill)
-                                            <option value="{{ $skill['id'] }}" @if ($mhs->skill_id == $skill->id) selected @endif>{{ $skill->skill }}</option>
+                                            <option value="{{ $skill['id'] }}" @if (in_array($skill->id, $skillMhs)) selected @endif>{{ $skill->skill }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -105,7 +104,7 @@ Profile Mahasiswa
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto_mhs" value="{{ $mhs->foto_mhs }}" />
+                                        <input type="file" class="form-control" name="foto_mhs" value="{{ url('images/'.$mhs->foto_mhs) }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

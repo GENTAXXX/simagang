@@ -17,6 +17,7 @@ class MitraController extends Controller
      */
     public function countPendaftar(){
         $data = Magang::where('approval', '0')
+        ->whereNotNull('dosen_id')
         ->get();
         return $data->count();
     }
@@ -44,6 +45,7 @@ class MitraController extends Controller
         ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mitra.user_id', Auth::id())
         ->where('approval', '!=', '2')
+        ->where('approval', '!=', '0')
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
         ->get();
         return $data->count();

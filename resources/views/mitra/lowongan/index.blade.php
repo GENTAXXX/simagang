@@ -1,7 +1,7 @@
 @extends('mitra.layout')
 
 @section('title')
-List Lowongan
+Daftar Lowongan
 @endsection
 
 @section('konteng')
@@ -55,7 +55,7 @@ List Lowongan
                                     <th class="text-center">Nomor</th>
                                     <th class="text-center">Nama</th>
                                     <th class="text-center">Deskripsi</th>
-                                    <th class="text-center">Lokasi</th>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Tindakan</th>
                                 </tr>
                             </thead>
@@ -66,7 +66,13 @@ List Lowongan
                                     <td class="text-center">{{ $no++ }}</a></td>
                                     <td class="text-center">{{ $low->nama_low }}</td>
                                     <td class="text-center">{{ $low->deskripsi_low }}</td>
-                                    <td class="text-center">{{ $low->lokasi }}</td>
+                                    <td class="text-center">
+                                        @if ($low->jumlah_mhs > 0)
+                                            <label class="badge badge-success">Tersedia</label>
+                                        @elseif ($low->jumlah_mhs <= 0)
+                                            <label class="badge badge-danger">Terpenuhi</label>
+                                        @endif
+                                    </td>
                                     <td class="text-center"><span>
                                             <form action="{{ route('lowongan.destroy', $low->id) }}" method="POST">
                                                 <a href="{{ route('lowongan.edit', $low->id) }}" class="btn btn-primary m-2">Ubah</a>

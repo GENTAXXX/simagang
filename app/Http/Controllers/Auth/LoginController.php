@@ -62,8 +62,7 @@ class LoginController extends Controller
                 return redirect()->route('mahasiswa.home');
             }
         } else {
-            return redirect()->route('login')
-            ->with('error', 'Email-Address And Password Are Wrong.');
+            return redirect()->route('login')->with('error','Alamat email dan password tidak sesuai!');
         }
     }
 }

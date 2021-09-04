@@ -140,7 +140,9 @@ class ProfileController extends Controller
                 $skill = Skill::all();
                 $gender = ['Laki-laki','Perempuan'];
                 $depart = Departemen::all();
-                return view('mhs.profile.edit', compact('mhs', 'jurusan', 'skill', 'gender', 'depart'));
+                $skillMhs = SkillMhs::where('skill_mhs.mhs_id', $mhs->id)
+                ->pluck('skill_id')->toArray();
+                return view('mhs.profile.edit', compact('mhs', 'jurusan', 'skill', 'gender', 'depart','skillMhs'));
                 break;
         };
     }
@@ -167,27 +169,48 @@ class ProfileController extends Controller
                     'foto_depart' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
 
-                $imageName = $request->nama_depart . '.' . $request->foto_depart->extension();
-                $request->foto_depart->move(public_path('images'), $imageName);
+                if ($request->foto_depart){
+                    $imageName = $request->nama_depart . '.' . $request->foto_depart->extension();
+                    $request->foto_depart->move(public_path('images'), $imageName);
 
-                try {
-                    $depart->update([
-                        'nama_depart' => $request->nama_depart,
-                        'alamat_depart' => $request->alamat_depart,
-                        'telepon_depart' => $request->telepon_depart,
-                        'NIDN' => $request->NIDN,
-                        'foto_depart' => $imageName,
-                    ]);
-    
-                    $user = User::where('id', Auth::id())->first();
-                    $user->update([
-                        'name' => $request->nama_depart
-                    ]);
-                    return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
-                    break;
-                } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profile gagal diubah!');
-                    break;
+                    try {
+                        $depart->update([
+                            'nama_depart' => $request->nama_depart,
+                            'alamat_depart' => $request->alamat_depart,
+                            'telepon_depart' => $request->telepon_depart,
+                            'NIDN' => $request->NIDN,
+                            'foto_depart' => $imageName,
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_depart
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
+                } else {
+                    try {
+                        $depart->update([
+                            'nama_depart' => $request->nama_depart,
+                            'alamat_depart' => $request->alamat_depart,
+                            'telepon_depart' => $request->telepon_depart,
+                            'NIDN' => $request->NIDN
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_depart
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
                 }
             case '2':
                 $mitra = Mitra::where("user_id", $idUserLogin)->first();
@@ -196,32 +219,54 @@ class ProfileController extends Controller
                     'alamat_mitra' => 'required',
                     'telepon_mitra' => 'required',
                     'fax_mitra' => 'required',
-                    'foto_mitra' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'foto_mitra' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'kab_id' => 'required',
                 ]);
 
-                $imageName = $request->nama_mitra . '.' . $request->foto_mitra->extension();
-                $request->foto_mitra->move(public_path('images'), $imageName);
+                if ($request->foto_mitra){
+                    $imageName = $request->nama_mitra . '.' . $request->foto_mitra->extension();
+                    $request->foto_mitra->move(public_path('images'), $imageName);
 
-                try {
-                    $mitra->update([
-                        'nama_mitra' => $request->nama_mitra,
-                        'alamat_mitra' => $request->alamat_mitra,
-                        'fax_mitra' => $request->fax_mitra,
-                        'telepon_mitra' => $request->telepon_mitra,
-                        'kab_id' => $request->kab_id,
-                        'foto_mitra' => $imageName,
-                    ]);
-    
-                    $user = User::where('id', Auth::id())->first();
-                    $user->update([
-                        'name' => $request->nama_mitra
-                    ]);
-                    return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
-                    break;
-                } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profile gagal diubah!');
-                    break;
+                    try {
+                        $mitra->update([
+                            'nama_mitra' => $request->nama_mitra,
+                            'alamat_mitra' => $request->alamat_mitra,
+                            'fax_mitra' => $request->fax_mitra,
+                            'telepon_mitra' => $request->telepon_mitra,
+                            'kab_id' => $request->kab_id,
+                            'foto_mitra' => $imageName,
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_mitra
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
+                } else {
+                    try {
+                        $mitra->update([
+                            'nama_mitra' => $request->nama_mitra,
+                            'alamat_mitra' => $request->alamat_mitra,
+                            'fax_mitra' => $request->fax_mitra,
+                            'telepon_mitra' => $request->telepon_mitra,
+                            'kab_id' => $request->kab_id
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_mitra
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
                 }
             case '3':
                 $dosen = Dosen::where("user_id", $idUserLogin)->first();
@@ -229,31 +274,52 @@ class ProfileController extends Controller
                     'nama_dosen' => 'required',
                     'telepon_dosen' => 'required',
                     'NIP' => 'required',
-                    'foto_dosen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'foto_dosen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'depart_id' => 'required',
                 ]);
 
-                $imageName = $request->nama_dosen . '.' . $request->foto_dosen->extension();
-                $request->foto_dosen->move(public_path('images'), $imageName);
+                if ($request->foto_dosen){
+                    $imageName = $request->nama_dosen . '.' . $request->foto_dosen->extension();
+                    $request->foto_dosen->move(public_path('images'), $imageName);
 
-                try {
-                    $dosen->update([
-                        'nama_dosen' => $request->nama_dosen,
-                        'telepon_dosen' => $request->telepon_dosen,
-                        'NIP' => $request->NIP,
-                        'depart_id' => $request->depart_id,
-                        'foto_dosen' => $imageName,
-                    ]);
-    
-                    $user = User::where('id', Auth::id())->first();
-                    $user->update([
-                        'name' => $request->nama_dosen
-                    ]);
-                    return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
-                    break;
-                } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profile gagal diubah!');
-                    break;
+                    try {
+                        $dosen->update([
+                            'nama_dosen' => $request->nama_dosen,
+                            'telepon_dosen' => $request->telepon_dosen,
+                            'NIP' => $request->NIP,
+                            'depart_id' => $request->depart_id,
+                            'foto_dosen' => $imageName,
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_dosen
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
+                } else {
+                    try {
+                        $dosen->update([
+                            'nama_dosen' => $request->nama_dosen,
+                            'telepon_dosen' => $request->telepon_dosen,
+                            'NIP' => $request->NIP,
+                            'depart_id' => $request->depart_id
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_dosen
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
                 }
             case '4':
                 $spv = Supervisor::where("user_id", $idUserLogin)->first();
@@ -261,32 +327,54 @@ class ProfileController extends Controller
                     'nama_spv' => 'required',
                     'telepon_spv' => 'required',
                     'no_pegawai' => 'required',
-                    'foto_spv' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'foto_spv' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'mitra_id' => 'required',
                 ]);
 
-                $imageName = $request->nama_spv . '.' . $request->foto_spv->extension();
-                $request->foto_spv->move(public_path('images'), $imageName);
-
-                try {
-                    $spv->update([
-                        'nama_spv' => $request->nama_spv,
-                        'telepon_spv' => $request->telepon_spv,
-                        'no_pegawai' => $request->no_pegawai,
-                        'mitra_id' => $request->mitra_id,
-                        'foto_spv' => $imageName,
-                    ]);
+                if ($request->foto_spv){
+                    $imageName = $request->nama_spv . '.' . $request->foto_spv->extension();
+                    $request->foto_spv->move(public_path('images'), $imageName);
     
-                    $user = User::where('id', Auth::id())->first();
-                    $user->update([
-                        'name' => $request->nama_spv
-                    ]);
-                    return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
-                    break;
-                } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profile gagal diubah!');
-                    break;
+                    try {
+                        $spv->update([
+                            'nama_spv' => $request->nama_spv,
+                            'telepon_spv' => $request->telepon_spv,
+                            'no_pegawai' => $request->no_pegawai,
+                            'mitra_id' => $request->mitra_id,
+                            'foto_spv' => $imageName,
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_spv
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
+                } else {
+                    try {
+                        $spv->update([
+                            'nama_spv' => $request->nama_spv,
+                            'telepon_spv' => $request->telepon_spv,
+                            'no_pegawai' => $request->no_pegawai,
+                            'mitra_id' => $request->mitra_id
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_spv
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
                 }
+                
             case '5':
                 $mhs = Mahasiswa::where("user_id", $idUserLogin)->first();
                 $request->validate([
@@ -297,43 +385,67 @@ class ProfileController extends Controller
                     'jurusan_id' => 'required',
                     'jenis_kelamin' => 'required',
                     'tgl_lahir' => 'required',
-                    'foto_mhs' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'foto_mhs' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'depart_id' => 'required'
                 ]);
 
                 foreach ($request->skill_id as $skill){
-                    // dd($skill);
-                    SkillMhs::create([
+                    SkillMhs::updateOrCreate([
                         'skill_id' => $skill,
                         'mhs_id' => $mhs->id
                     ]);
                 }
 
-                $imageName = $request->nama_mhs . '.' . $request->foto_mhs->extension();
-                $request->foto_mhs->move(public_path('images'), $imageName);
-                
-                try {
-                    $mhs->update([
-                        'nama_mhs' => $request->nama_mhs,
-                        'NIM' => $request->NIM,
-                        'telepon_mhs' => $request->telepon_mhs,
-                        'pengalaman' => $request->pengalaman,
-                        'jurusan_id' => $request->jurusan_id,
-                        'jenis_kelamin' => $request->jenis_kelamin,
-                        'tgl_lahir' => $request->tgl_lahir,
-                        'foto_mhs' => $imageName,
-                        'depart_id' => $request->depart_id
-                    ]);
-    
-                    $user = User::where('id', Auth::id())->first();
-                    $user->update([
-                        'name' => $request->nama_mhs
-                    ]);
-                    return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
-                    break;
-                } catch (\Exception $e){
-                    return redirect()->back()->with('error', 'Profile gagal diubah!');
-                    break;
+                if ($request->foto_mhs){
+                    $imageName = $request->nama_mhs . '.' . $request->foto_mhs->extension();
+                    $request->foto_mhs->move(public_path('images'), $imageName);
+
+                    try {
+                        $mhs->update([
+                            'nama_mhs' => $request->nama_mhs,
+                            'NIM' => $request->NIM,
+                            'telepon_mhs' => $request->telepon_mhs,
+                            'pengalaman' => $request->pengalaman,
+                            'jurusan_id' => $request->jurusan_id,
+                            'jenis_kelamin' => $request->jenis_kelamin,
+                            'tgl_lahir' => $request->tgl_lahir,
+                            'foto_mhs' => $imageName,
+                            'depart_id' => $request->depart_id
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_mhs
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
+                } else {
+                    try {
+                        $mhs->update([
+                            'nama_mhs' => $request->nama_mhs,
+                            'NIM' => $request->NIM,
+                            'telepon_mhs' => $request->telepon_mhs,
+                            'pengalaman' => $request->pengalaman,
+                            'jurusan_id' => $request->jurusan_id,
+                            'jenis_kelamin' => $request->jenis_kelamin,
+                            'tgl_lahir' => $request->tgl_lahir,
+                            'depart_id' => $request->depart_id
+                        ]);
+        
+                        $user = User::where('id', Auth::id())->first();
+                        $user->update([
+                            'name' => $request->nama_mhs
+                        ]);
+                        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah!');
+                        break;
+                    } catch (\Exception $e){
+                        return redirect()->back()->with('error', 'Profile gagal diubah!');
+                        break;
+                    }
                 }
         }
     }

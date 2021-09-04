@@ -81,7 +81,9 @@ class LogBookController extends Controller
     public function store(Request $request)
     {
         $magang = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
-        ->where('mahasiswa.user_id', Auth::id())->first();
+        ->where('mahasiswa.user_id', Auth::id())
+        ->select('magang.id as mag_id', 'magang.*', 'mahasiswa.*')
+        ->first();
 
         $request->validate([
             'tanggal' => 'required',
@@ -96,7 +98,7 @@ class LogBookController extends Controller
                 'kegiatan' => $request->kegiatan,
                 'deskripsi_log' => $request->deskripsi_log,
                 'saran' => $request->saran,
-                'magang_id' => $magang->id,
+                'magang_id' => $magang->mag_id,
             ]);
             return redirect()->back()->with('success', 'Aktivitas berhasil ditambahkan!');
         } catch (\Exception $e){

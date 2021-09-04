@@ -87,12 +87,12 @@ Bimbingan
                                 @foreach ($bimbingan as $bim)
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
-                                    <td class="text-center">{{ $bim['tgl_bimbingan'] }}</td>
-                                    <td class="text-center">{{ $bim['catatan'] }}</td>
+                                    <td class="text-center">{{ $bim->tgl_bimbingan }}</td>
+                                    <td class="text-center">{{ $bim->catatan }}</td>
                                     <td class="text-center">
                                         <a href="{{ asset('file/'.$bim->file) }}" class="btn btn-primary btn-file">Unduh</a> 
                                     </td>
-                                    <td class="text-center">{{ $bim['feedback'] }}</td>
+                                    <td class="text-center">{{ $bim->feedback }}</td>
                                 </tr>
                                 @endforeach 
                             </tbody>

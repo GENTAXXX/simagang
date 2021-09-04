@@ -78,7 +78,7 @@ class BimbinganController extends Controller
         $bimbingan = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->where('mahasiswa.user_id', Auth::id())
-        ->orderBy('bimbingan.tgl_bimbingan', 'asc')
+        ->orderBy('tgl_bimbingan', 'asc')
         ->get();
         return view('mhs.bimbingan.index', compact('bimbingan', 'low'));
     }
@@ -102,7 +102,9 @@ class BimbinganController extends Controller
     public function store(Request $request)
     {
         $magang = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
-        ->where('mahasiswa.user_id', Auth::id())->first();
+        ->where('mahasiswa.user_id', Auth::id())
+        ->select('magang.id as mag_id', 'magang.*', 'mahasiswa.*')
+        ->first();
 
         $request->validate([
             'catatan' => 'required',
@@ -118,7 +120,7 @@ class BimbinganController extends Controller
                 'catatan' => $request->catatan,
                 'tgl_bimbingan' => $request->tgl_bimbingan,
                 'file' => $fileName,
-                'magang_id' => $magang->id,
+                'magang_id' => $magang->mag_id,
             ]);
             return redirect()->back()->with('success', 'Bimbingan berhasil ditambahkan!');
         } catch (\Exception $e){

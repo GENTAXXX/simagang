@@ -85,6 +85,7 @@ class ApplyController extends Controller
         ->where('mitra.user_id', Auth::id())
         ->where('approval', '!=', '2')
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
+        ->orderBy('approval', 'asc')
         ->get();
         $todayDate = date("Y-m-d");
         return view('mitra.magang.index', compact('data', 'todayDate'));
@@ -98,8 +99,7 @@ class ApplyController extends Controller
         ->where('approval', '0')
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
         ->get();
-        $count = $this->countPendaftar();
-        return view('mitra.pendaftar.index', compact('data', 'count'));
+        return view('mitra.pendaftar.index', compact('data'));
     }
     
     public function pendaftar($id){
@@ -120,9 +120,13 @@ class ApplyController extends Controller
     }
 
     public function listPengajuan(){
-        $magang = Magang::whereNull('dosen_id')->get();
-        $count = $this->countPengajuan();
-        return view('depart.pengajuan.index', compact('magang', 'count'));
+        $magang = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('departemen', 'mahasiswa.depart_id', '=', 'departemen.id')
+        ->where('departemen.user_id', Auth::id())
+        ->whereNull('dosen_id')
+        ->select('mahasiswa.*', 'departemen.*', 'magang.id as magang_id', 'magang.*')
+        ->get();
+        return view('depart.pengajuan.index', compact('magang'));
     }
 
     public function pengajuan($id){
