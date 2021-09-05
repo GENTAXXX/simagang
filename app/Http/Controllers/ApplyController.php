@@ -20,16 +20,29 @@ class ApplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function countPendaftar(){
-        $data = Magang::whereNull('spv_id')
-        ->get();
-        return $data->count();
+    public function departLayout(){
+        $depart = Departemen::where('user_id', Auth::id())->first();
+        return $depart->foto_depart;
     }
-    
-    public function countPengajuan(){
-        $data = Magang::whereNull('dosen_id')
-        ->get();
-        return $data->count();
+
+    public function dospemLayout(){
+        $dosen = Dosen::where('user_id', Auth::id())->first();
+        return $dosen->foto_dosen;
+    }
+
+    public function mhsLayout(){
+        $mhs = Mahasiswa::where('user_id', Auth::id())->first();
+        return $mhs->foto_mhs;
+    }
+
+    public function mitraLayout(){
+        $mitra = Mitra::where('user_id', Auth::id())->first();
+        return $mitra->foto_mitra;
+    }
+
+    public function spvLayout(){
+        $spv = Supervisor::where('user_id', Auth::id())->first();
+        return $spv->foto_spv;
     }
 
     public function score(Request $request, $id){
@@ -53,7 +66,8 @@ class ApplyController extends Controller
         ->where('approval', '3')
         ->select('magang.*', 'magang.id as mag_id', 'supervisor.*', 'mahasiswa.*', 'lowongan.nama_low')
         ->get();
-        return view('spv.penilaian.index', compact('data'));
+        $spv = $this->spvLayout();
+        return view('spv.penilaian.index', compact('data', 'spv'));
     }
 
     public function diajukan(){
@@ -61,7 +75,8 @@ class ApplyController extends Controller
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->get();
-        return view('mhs.ajukan.index', compact('data'));
+        $mhs = $this->mhsLayout();
+        return view('mhs.ajukan.index', compact('data', 'mhs'));
     }
 
     public function detailMagang($id){
@@ -75,7 +90,8 @@ class ApplyController extends Controller
                 ->select('skill')->get();
 
         $todayDate = date("Y-m-d");
-        return view('mitra.magang.show', compact('data', 'skill', 'mhs', 'todayDate'));
+        $mitra = $this->mitraLayout();
+        return view('mitra.magang.show', compact('data', 'skill', 'mhs', 'todayDate', 'mitra'));
     }
 
     public function listMagang(){
@@ -88,7 +104,8 @@ class ApplyController extends Controller
         ->orderBy('approval', 'asc')
         ->get();
         $todayDate = date("Y-m-d");
-        return view('mitra.magang.index', compact('data', 'todayDate'));
+        $mitra = $this->mitraLayout();
+        return view('mitra.magang.index', compact('data', 'todayDate', 'mitra'));
     }
 
     public function listPendaftar(){
@@ -99,7 +116,8 @@ class ApplyController extends Controller
         ->where('approval', '0')
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
         ->get();
-        return view('mitra.pendaftar.index', compact('data'));
+        $mitra = $this->mitraLayout();
+        return view('mitra.pendaftar.index', compact('data', 'mitra'));
     }
     
     public function pendaftar($id){
@@ -112,11 +130,11 @@ class ApplyController extends Controller
                 ->where('skill_mhs.mhs_id', $mhs->id)
                 ->select('skill')->get();
 
-        $mitra = Mitra::where('user_id', Auth::id())->first();
-        $spv = Supervisor::where('mitra_id', $mitra->id)->get();
+        $mitraId = Mitra::where('user_id', Auth::id())->first();
+        $spv = Supervisor::where('mitra_id', $mitraId->id)->get();
 
-        $count = $this->countPendaftar();
-        return view('mitra.pendaftar.edit', compact('data', 'spv', 'count', 'mhs', 'skill'));
+        $mitra = $this->mitraLayout();
+        return view('mitra.pendaftar.edit', compact('data', 'spv', 'mitra', 'mhs', 'skill'));
     }
 
     public function listPengajuan(){
@@ -126,7 +144,8 @@ class ApplyController extends Controller
         ->whereNull('dosen_id')
         ->select('mahasiswa.*', 'departemen.*', 'magang.id as magang_id', 'magang.*')
         ->get();
-        return view('depart.pengajuan.index', compact('magang'));
+        $depart = $this->departLayout();
+        return view('depart.pengajuan.index', compact('magang', 'depart'));
     }
 
     public function pengajuan($id){
@@ -140,27 +159,28 @@ class ApplyController extends Controller
                 ->where('skill_mhs.mhs_id', $mhs->id)
                 ->select('skill')->get();
 
-        $depart = Departemen::where('user_id', Auth::id())->first();
-        $dosen = Dosen::where('depart_id', $depart->id)->get();
+        $departId = Departemen::where('user_id', Auth::id())->first();
+        $dosen = Dosen::where('depart_id', $departId->id)->get();
 
-        $count = $this->countPengajuan();
-        return view('depart.pengajuan.edit', compact('data', 'dosen', 'count', 'mhs', 'skill'));
+        $depart = $this->departLayout();
+        return view('depart.pengajuan.edit', compact('data', 'dosen', 'depart', 'mhs', 'skill'));
     }
 
     public function apply($id){
         $idUserLogin = Auth::id();
-        $mhs = Mahasiswa::where('user_id', $idUserLogin)->first();
+        $mhsId = Mahasiswa::where('user_id', $idUserLogin)->first();
         $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
-                ->where('skill_mhs.mhs_id', $mhs->id)
+                ->where('skill_mhs.mhs_id', $mhsId->id)
                 ->select('skill')->get();
         $low = Lowongan::find($id);
         $button = 'enable';
-        if ($mhs->NIM == null || $mhs->telepon_mhs == null || $mhs->pengalaman == null || 
-        $mhs->jurusan_id == null || $mhs->status_id == null || $mhs->jenis_kelamin == null || 
-        $mhs->tgl_lahir == null || $mhs->foto_mhs == null){
+        if ($mhsId->NIM == null || $mhsId->telepon_mhs == null || $mhsId->pengalaman == null || 
+        $mhsId->jurusan_id == null || $mhsId->status_id == null || $mhsId->jenis_kelamin == null || 
+        $mhsId->tgl_lahir == null || $mhsId->foto_mhs == null){
             $button = 'disabled';
         };
-        return view('lowongan.apply', compact('mhs', 'low', 'button', 'skill'));
+        $mhs = $this->mhsLayout();
+        return view('lowongan.apply', compact('mhs', 'low', 'button', 'skill', 'mhsId'));
     }
 
     public function detail($id){

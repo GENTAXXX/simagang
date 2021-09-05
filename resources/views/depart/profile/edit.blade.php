@@ -29,43 +29,34 @@ Edit Profile
             <div class="card">
                 <div class="card-header p-2">
                     <a class="nav-link" href="#settings" data-toggle="tab">Pengaturan</a>
-                </div><!-- /.card-header -->
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div><br />
-                @endif
+                </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal" action="{{ route('profile.update', $depart->id) }}" method="POST" enctype="multipart/form-data">
+                                <form class="form-horizontal" action="{{ route('profile.update', $departId->id) }}" method="POST" enctype="multipart/form-data">
                                     @method('PATCH')
                                     @csrf
                                     <div class="form-group">
                                         <label for="nama">Nama:</label>
-                                        <input type="text" class="form-control" name="nama_depart" value="{{ $depart->nama_depart }}" />
+                                        <input type="text" class="form-control" name="nama_depart" value="{{ $departId->nama_depart }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="alamat">Alamat:</label>
-                                        <textarea class="form-control" name="alamat_depart">{{ $depart->alamat_depart }}</textarea>
+                                        <textarea class="form-control" name="alamat_depart">{{ $departId->alamat_depart }}</textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="telepon">Telepon:</label>
-                                        <input type="number" class="form-control" name="telepon_depart" value="{{ $depart->telepon_depart }}" />
+                                        <input type="number" class="form-control" name="telepon_depart" value="{{ $departId->telepon_depart }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="NIDN">NIDN:</label>
-                                        <input type="number" class="form-control" name="NIDN" value="{{ $depart->NIDN }}" />
+                                        <input type="number" class="form-control" name="NIDN" value="{{ $departId->NIDN }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto_depart" value="{{ $depart->foto_depart }}" />
+                                        <input type="file" class="form-control" name="foto_depart" value="{{ $departId->foto_depart }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

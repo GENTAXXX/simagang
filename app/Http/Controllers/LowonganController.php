@@ -16,6 +16,10 @@ class LowonganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function mitraLayout(){
+        $mitra = Mitra::where('user_id', Auth::id())->first();
+        return $mitra->foto_mitra;
+    }
 
     public function AllLowongan(Request $request){
         $cari = $request->cari;
@@ -28,9 +32,10 @@ class LowonganController extends Controller
     public function index()
     {
         $idUserLogin = Auth::id();
-        $mitra = Mitra::where("user_id", $idUserLogin)->first();
-        $low = Lowongan::where("mitra_id", $mitra->id)->get();
-        return view('mitra.lowongan.index', compact('low'));
+        $mitraId = Mitra::where("user_id", $idUserLogin)->first();
+        $low = Lowongan::where("mitra_id", $mitraId->id)->get();
+        $mitra = $this->mitraLayout();
+        return view('mitra.lowongan.index', compact('low', 'mitra'));
     }
 
     /**
@@ -41,8 +46,9 @@ class LowonganController extends Controller
     public function create()
     {
         $kategori = Kategori::all();
-        $mitra = Mitra::where('user_id', Auth::id())->first();
-        return view('mitra.lowongan.create', compact('mitra', 'kategori'));
+        $mitraId = Mitra::where('user_id', Auth::id())->first();
+        $mitra = $this->mitraLayout();
+        return view('mitra.lowongan.create', compact('mitraId', 'kategori', 'mitra'));
     }
 
     /**
@@ -109,8 +115,9 @@ class LowonganController extends Controller
     {
         $low = Lowongan::find($lowongan->id);
         $kategori = Kategori::all();
-        $mitra = Mitra::where('user_id', Auth::id())->first();
-        return view('mitra.lowongan.edit', compact('low', 'kategori', 'mitra'));
+        $mitraId = Mitra::where('user_id', Auth::id())->first();
+        $mitra = $this->mitraLayout();
+        return view('mitra.lowongan.edit', compact('low', 'kategori', 'mitraId', 'mitra'));
     }
 
     /**

@@ -21,17 +21,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function countPengajuan(){
-        $data = Magang::whereNull('dosen_id')
-        ->get();
-        return $data->count();
+    public function departLayout(){
+        $depart = Departemen::where('user_id', Auth::id())->first();
+        return $depart->foto_depart;
     }
 
     public function index()
     {
         $user = User::orderBy('role_id', 'asc')->get();
-        $count = $this->countPengajuan();
-        return view('depart.user.index', compact('user', 'count'));
+        $depart = $this->departLayout();
+        return view('depart.user.index', compact('user', 'depart'));
     }
 
     /**
@@ -42,8 +41,8 @@ class UserController extends Controller
     public function create()
     {
         $role = Role::all();
-        $count = $this->countPengajuan();
-        return view('depart.user.create', compact('role', 'count'));
+        $depart = $this->departLayout();
+        return view('depart.user.create', compact('role', 'depart'));
     }
 
     /**
@@ -71,7 +70,6 @@ class UserController extends Controller
         ->first();
 
         $user = User::create($request->all());
-        // dd($user['id']);
         switch ($user->role_id) {
             case '1':
                 Departemen::create([
@@ -140,8 +138,8 @@ class UserController extends Controller
     {
         $user = User::find($user->id);
         $role = Role::all();
-        $count = $this->countPengajuan();
-        return view('depart.user.edit', compact('user', 'role', 'count'));
+        $depart = $this->departLayout();
+        return view('depart.user.edit', compact('user', 'role', 'depart'));
     }
 
     /**

@@ -43,25 +43,25 @@ Profile Mahasiswa
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal" action="{{ route('profile.update', $mhs->id) }}" method="POST" enctype="multipart/form-data">
+                                <form class="form-horizontal" action="{{ route('profile.update', $mhsId->id) }}" method="POST" enctype="multipart/form-data">
                                     @method('PATCH')
                                     @csrf
                                     <div class="form-group">
                                         <label for="nama">Nama:</label>
-                                        <input type="text" class="form-control" name="nama_mhs" value="{{ $mhs->nama_mhs }}" />
+                                        <input type="text" class="form-control" name="nama_mhs" value="{{ $mhsId->nama_mhs }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="NIM">NIM:</label>
-                                        <input type="text" class="form-control" name="NIM" value="{{ $mhs->NIM }}" />
+                                        <input type="text" class="form-control" name="NIM" value="{{ $mhsId->NIM }}" />
                                     </div>
 
                                     <div class="form-group">
                                         <label for="telepon">Telepon:</label>
-                                        <input type="number" class="form-control" name="telepon_mhs" value="{{ $mhs->telepon_mhs }}" />
+                                        <input type="number" class="form-control" name="telepon_mhs" value="{{ $mhsId->telepon_mhs }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="pengalaman">Pengalaman:</label>
-                                        <textarea class="form-control" name="pengalaman">{{ $mhs->pengalaman }}</textarea>
+                                        <textarea class="form-control" name="pengalaman">{{ $mhsId->pengalaman }}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="depart_id">Departemen:</label>
@@ -100,11 +100,11 @@ Profile Mahasiswa
                                     </div>
                                     <div class="form-group">
                                         <label for="tgl_lahir">Tanggal Lahir:</label>
-                                        <input type="date" class="form-control" name="tgl_lahir" value="{{ $mhs->tgl_lahir }}" />
+                                        <input type="date" class="form-control" name="tgl_lahir" value="{{ $mhsId->tgl_lahir }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto_mhs" value="{{ url('images/'.$mhs->foto_mhs) }}" />
+                                        <input type="file" class="form-control" name="foto_mhs" value="{{ url('images/'.$mhsId->foto_mhs) }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

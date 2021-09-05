@@ -29,34 +29,25 @@ Edit Profile
             <div class="card">
                 <div class="card-header p-2">
                     <a class="nav-link" href="#settings" data-toggle="tab">Pengaturan</a>
-                </div><!-- /.card-header -->
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div><br />
-                @endif
+                </div>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal" action="{{ route('profile.update', $dosen->id) }}" method="POST" enctype="multipart/form-data">
+                                <form class="form-horizontal" action="{{ route('profile.update', $dosenId->id) }}" method="POST" enctype="multipart/form-data">
                                     @method('PATCH')
                                     @csrf
                                     <div class="form-group">
                                         <label for="nama">Nama:</label>
-                                        <input type="text" class="form-control" name="nama_dosen" value="{{ $dosen->nama_dosen }}" />
+                                        <input type="text" class="form-control" name="nama_dosen" value="{{ $dosenId->nama_dosen }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="telepon">Telepon:</label>
-                                        <input type="number" class="form-control" name="telepon_dosen" value="{{ $dosen->telepon_dosen }}" />
+                                        <input type="number" class="form-control" name="telepon_dosen" value="{{ $dosenId->telepon_dosen }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="NIP">NIP:</label>
-                                        <input type="number" class="form-control" name="NIP" value="{{ $dosen->NIP }}" />
+                                        <input type="number" class="form-control" name="NIP" value="{{ $dosenId->NIP }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="depart_id">Departemen:</label>
@@ -69,7 +60,7 @@ Edit Profile
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto_dosen" value="{{ $dosen->foto_dosen }}" />
+                                        <input type="file" class="form-control" name="foto_dosen" value="{{ $dosenId->foto_dosen }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

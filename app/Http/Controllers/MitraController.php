@@ -17,8 +17,9 @@ class MitraController extends Controller
      */
     public function mitraLayout(){
         $mitra = Mitra::where('user_id', Auth::id())->first();
-        return view('mitra.layout', compact('mitra'));
+        return $mitra->foto_mitra;
     }
+
     public function countPendaftar(){
         $data = Magang::where('approval', '0')
         ->whereNotNull('dosen_id')
@@ -28,11 +29,11 @@ class MitraController extends Controller
 
     public function mitraHome()
     {
-        $mitra = Mitra::where("user_id", Auth::id())->first();
         $count = $this->countPendaftar();
         $low = $this->countLowongan();
         $mag = $this->countMag();
         $full = $this->countLowFull();
+        $mitra = $this->mitraLayout();
         return view('mitra.home', compact('mitra', 'count', 'low', 'mag', 'full'));
     }
 

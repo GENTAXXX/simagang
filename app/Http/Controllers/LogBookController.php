@@ -7,6 +7,7 @@ use App\Models\Lowongan;
 use App\Models\Magang;
 use App\Models\Mahasiswa;
 use App\Models\SkillMhs;
+use App\Models\Supervisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -18,6 +19,16 @@ class LogBookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function mhsLayout(){
+        $mhs = Mahasiswa::where('user_id', Auth::id())->first();
+        return $mhs->foto_mhs;
+    }
+
+    public function spvLayout(){
+        $spv = Supervisor::where('user_id', Auth::id())->first();
+        return $spv->foto_spv;
+    }
+
     public function print(){
         $logs = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
@@ -34,7 +45,8 @@ class LogBookController extends Controller
         $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
         ->where('skill_mhs.mhs_id', $mhs->id)
         ->select('skill')->get();
-        return view('spv.logbook.show', compact('data', 'mhs', 'skill'));
+        $spv = $this->spvLayout();
+        return view('spv.logbook.show', compact('data', 'mhs', 'skill', 'spv'));
     }
 
     public function mhsLogbook(){
@@ -46,7 +58,8 @@ class LogBookController extends Controller
         ->select('mahasiswa.id as mhs_id', 'mahasiswa.*', 'lowongan.*', 'supervisor.*', 'magang.approval')
         ->orderBy('magang.approval', 'asc')
         ->get();
-        return view('spv.logbook.index', compact('data'));
+        $spv = $this->spvLayout();
+        return view('spv.logbook.index', compact('data', 'spv'));
     }
 
     public function index()
@@ -59,7 +72,8 @@ class LogBookController extends Controller
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->get();
-        return view('mhs.logbook.index', compact('logs', 'low'));
+        $mhs = $this->mhsLayout();
+        return view('mhs.logbook.index', compact('logs', 'low', 'mhs'));
     }
 
     /**

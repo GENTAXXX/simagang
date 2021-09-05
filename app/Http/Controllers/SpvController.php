@@ -17,12 +17,12 @@ class SpvController extends Controller
      */
     public function spvLayout(){
         $spv = Supervisor::where('user_id', Auth::id())->first();
-        return view('spv.layout', compact('spv'));
+        return $spv->foto_spv;
     }
 
     public function supervisorHome()
     {
-        $spv = Supervisor::where("user_id", Auth::id())->first();
+        $spv = $this->spvLayout();
         $mhsLogbook = $this->countMhsLogbook();
         $nilai = $this->countPenilaian();
         return view('spv.home', compact('spv', 'mhsLogbook', 'nilai'));

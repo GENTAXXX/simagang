@@ -23,49 +23,64 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function countPengajuan(){
-        $data = Magang::whereNull('dosen_id')
-        ->get();
-        return $data->count();
+    public function departLayout(){
+        $depart = Departemen::where('user_id', Auth::id())->first();
+        return $depart->foto_depart;
     }
 
-    public function countPendaftar(){
-        $data = Magang::whereNull('spv_id')
-        ->whereNotNull('dosen_id')
-        ->get();
-        return $data->count();
+    public function dospemLayout(){
+        $dosen = Dosen::where('user_id', Auth::id())->first();
+        return $dosen->foto_dosen;
     }
+
+    public function mhsLayout(){
+        $mhs = Mahasiswa::where('user_id', Auth::id())->first();
+        return $mhs->foto_mhs;
+    }
+
+    public function mitraLayout(){
+        $mitra = Mitra::where('user_id', Auth::id())->first();
+        return $mitra->foto_mitra;
+    }
+
+    public function spvLayout(){
+        $spv = Supervisor::where('user_id', Auth::id())->first();
+        return $spv->foto_spv;
+    }
+
     public function index()
     {
         $idUserLogin = Auth::id();
         $user = User::where("id", $idUserLogin)->first();
         switch ($user->role_id) {
             case '1':
-                $depart = Departemen::where("user_id", $idUserLogin)->first();
-                $count = $this->countPengajuan();
-                return view('depart.profile.index', compact('depart', 'count'));
+                $departId = Departemen::where("user_id", $idUserLogin)->first();
+                $depart = $this->departLayout();
+                return view('depart.profile.index', compact('departId', 'depart'));
                 break;
             case '2':
-                $mitra = Mitra::where("user_id", $idUserLogin)->first();
-                $count = $this->countPendaftar();
-                return view('mitra.profile.index', compact('mitra', 'count'));
+                $mitraId = Mitra::where("user_id", $idUserLogin)->first();
+                $mitra = $this->mitraLayout();
+                return view('mitra.profile.index', compact('mitraId', 'mitra'));
                 break;
             case '3':
-                $dosen = Dosen::where("user_id", $idUserLogin)->first();
-                return view('dosen.profile.index', compact('dosen'));
+                $dosenId = Dosen::where("user_id", $idUserLogin)->first();
+                $dosen = $this->dospemLayout();
+                return view('dosen.profile.index', compact('dosenId', 'dosen'));
                 break;
             case '4':
-                $spv = Supervisor::where("user_id", $idUserLogin)->first();
-                return view('spv.profile.index', compact('spv'));
+                $spvId = Supervisor::where("user_id", $idUserLogin)->first();
+                $spv = $this->spvLayout();
+                return view('spv.profile.index', compact('spvId', 'spv'));
                 break;
             case '5':
-                $mhs = Mahasiswa::where("user_id", $idUserLogin)->first();
+                $mhsId = Mahasiswa::where("user_id", $idUserLogin)->first();
                 // dd($mhs);
                 $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
-                ->where('skill_mhs.mhs_id', $mhs->id)
+                ->where('skill_mhs.mhs_id', $mhsId->id)
                 ->select('skill')->get();
-                
-                return view('mhs.profile.index', compact('mhs', 'skill'));
+                $mhs = $this->mhsLayout();
+                return view('mhs.profile.index', compact('mhsId', 'skill', 'mhs'));
                 break;
         };
     }
@@ -114,35 +129,38 @@ class ProfileController extends Controller
         $user = User::where("id", $idUserLogin)->first();
         switch ($user->role_id) {
             case '1':
-                $depart = Departemen::where("user_id", $idUserLogin)->first();
-                $count = $this->countPengajuan();
-                return view('depart.profile.edit', compact('depart', 'count'));
+                $departId = Departemen::where("user_id", $idUserLogin)->first();
+                $depart = $this->departLayout();
+                return view('depart.profile.edit', compact('departId', 'depart'));
                 break;
             case '2':
-                $mitra = Mitra::where("user_id", $idUserLogin)->first();
+                $mitraId = Mitra::where("user_id", $idUserLogin)->first();
                 $kabupatens = Kabupaten::all();
-                $count = $this->countPendaftar();
-                return view('mitra.profile.edit', compact('mitra', 'kabupatens', 'count'));
+                $count = $this->mitraLayout();
+                return view('mitra.profile.edit', compact('mitraId', 'kabupatens', 'mitra'));
                 break;
             case '3':
-                $dosen = Dosen::where("user_id", $idUserLogin)->first();
-                $depart = Departemen::all();
-                return view('dosen.profile.edit', compact('dosen', 'depart'));
+                $dosenId = Dosen::where("user_id", $idUserLogin)->first();
+                $depart = Departemen::where('id', $dosenId->depart_id);
+                $dosen = $this->dospemLayout();
+                return view('dosen.profile.edit', compact('dosenId', 'depart', 'dosen'));
                 break;
             case '4':
-                $spv = Supervisor::where("user_id", $idUserLogin)->first();
+                $spvId = Supervisor::where("user_id", $idUserLogin)->first();
                 $mitra = Mitra::all();
-                return view('spv.profile.edit', compact('spv', 'mitra'));
+                $spv = $this->spvLayout();
+                return view('spv.profile.edit', compact('spvId', 'mitra', 'spv'));
                 break;
             case '5':
-                $mhs = Mahasiswa::where("user_id", $idUserLogin)->first();
+                $mhsId = Mahasiswa::where("user_id", $idUserLogin)->first();
                 $jurusan = Jurusan::all();
                 $skill = Skill::all();
                 $gender = ['Laki-laki','Perempuan'];
                 $depart = Departemen::all();
-                $skillMhs = SkillMhs::where('skill_mhs.mhs_id', $mhs->id)
+                $skillMhs = SkillMhs::where('skill_mhs.mhs_id', $mhsId->id)
                 ->pluck('skill_id')->toArray();
-                return view('mhs.profile.edit', compact('mhs', 'jurusan', 'skill', 'gender', 'depart','skillMhs'));
+                $mhs = $this->mhsLayout();
+                return view('mhs.profile.edit', compact('mhs', 'jurusan', 'skill', 'gender', 'depart','skillMhs', 'mhsId'));
                 break;
         };
     }

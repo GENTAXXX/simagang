@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Bimbingan;
+use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\Magang;
 use App\Models\Lowongan;
@@ -17,6 +18,15 @@ class BimbinganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dospemLayout(){
+        $dosen = Dosen::where('user_id', Auth::id())->first();
+        return $dosen->foto_dosen;
+    }
+
+    public function mhsLayout(){
+        $mhs = Mahasiswa::where('user_id', Auth::id())->first();
+        return $mhs->foto_mhs;
+    }
     
     public function feedbackBimbingan(Request $request, $id){
         $bim = Bimbingan::find($id);
@@ -45,7 +55,8 @@ class BimbinganController extends Controller
         $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
         ->where('skill_mhs.mhs_id', $mhs->id)
         ->select('skill')->get();
-        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag', 'skill'));
+        $dosen = $this->dospemLayout();
+        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag', 'skill', 'dosen'));
     }
 
     public function mhsBimbingan(){
@@ -65,7 +76,8 @@ class BimbinganController extends Controller
             if(!isset($d->catatan) && !isset($d->feedback) && !isset($d->tgl_bimbingan)) 
             $arrFeedback[$d->mhs_id] = "Belum ada bimbingan";
         }
-        return view('dosen.bimbingan.index', compact('data', 'arrFeedback'));
+        $dosen = $this->dospemLayout();
+        return view('dosen.bimbingan.index', compact('data', 'arrFeedback', 'dosen'));
     }
 
     public function index()
@@ -80,7 +92,8 @@ class BimbinganController extends Controller
         ->where('mahasiswa.user_id', Auth::id())
         ->orderBy('tgl_bimbingan', 'asc')
         ->get();
-        return view('mhs.bimbingan.index', compact('bimbingan', 'low'));
+        $mhs = $this->mhsLayout();
+        return view('mhs.bimbingan.index', compact('bimbingan', 'low', 'mhs'));
     }
 
     /**

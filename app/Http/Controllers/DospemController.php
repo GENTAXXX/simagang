@@ -17,7 +17,7 @@ class DospemController extends Controller
      */
     public function dospemLayout(){
         $dosen = Dosen::where('user_id', Auth::id())->first();
-        return view('dosen.layout', compact('dosen'));
+        return $dosen->foto_dosen;
     }
 
     public function dospemHome()

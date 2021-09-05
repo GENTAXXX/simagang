@@ -19,15 +19,15 @@ class MhsController extends Controller
      */
     public function mhsLayout(){
         $mhs = Mahasiswa::where('user_id', Auth::id())->first();
-        dd($mhs);
-        return view('mhs.layout', compact('mhs'));
+        return $mhs->foto_mhs;
     }
+
     public function mahasiswaHome()
     {
-        $mhs = Mahasiswa::where("user_id", Auth::id())->first();
         $ajukan = $this->countAjukan();
         $log = $this->countLogbook();
         $bim = $this->countBimbingan();
+        $mhs = $this->mhsLayout();
         return view('mhs.home', compact('mhs', 'ajukan', 'log', 'bim'));
     }
 

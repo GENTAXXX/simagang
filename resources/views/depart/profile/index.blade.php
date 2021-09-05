@@ -33,32 +33,32 @@ Profile Departemen
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$depart->foto_depart) }}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$departId->foto_depart) }}" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ $depart->nama_depart }}</h3>
+                            <h3 class="profile-username text-center">{{ $departId->nama_depart }}</h3>
 
                             <p class="text-muted text-center">{{ Auth::user()->email }}</p>
                             <strong><i class="fas fa-book mr-1"></i> Alamat</strong>
 
-                            <p class="text-muted">{{ $depart->alamat_depart }}</p>
+                            <p class="text-muted">{{ $departId->alamat_depart }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                            <p class="text-muted">{{ $depart->telepon_depart }}</p>
+                            <p class="text-muted">{{ $departId->telepon_depart }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> NIDN</strong>
 
-                            <p class="text-muted">{{ $depart->NIDN }}</p>
+                            <p class="text-muted">{{ $departId->NIDN }}</p>
 
                         </div>
                         <div class="form-group row">
                             <div class="offset-sm-5 ">
-                                <a class="btn btn-danger" href="{{ route('profile.edit', $depart->id) }}">
+                                <a class="btn btn-danger" href="{{ route('profile.edit', $departId->id) }}">
                                     Ubah
                                 </a>
                             </div>

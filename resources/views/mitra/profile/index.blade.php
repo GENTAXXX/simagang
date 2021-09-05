@@ -33,38 +33,38 @@ Profile Mitra
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$mitra->foto_mitra) }}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$mitraId->foto_mitra) }}" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ $mitra->nama_mitra }}</h3>
+                            <h3 class="profile-username text-center">{{ $mitraId->nama_mitra }}</h3>
 
                             <p class="text-muted text-center">{{ Auth::user()->email }}</p>
                             <strong><i class="fas fa-book mr-1"></i> Alamat</strong>
 
-                            <p class="text-muted">{{ $mitra->alamat_mitra }}</p>
+                            <p class="text-muted">{{ $mitraId->alamat_mitra }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                            <p class="text-muted">{{ $mitra->telepon_mitra }}</p>
+                            <p class="text-muted">{{ $mitraId->telepon_mitra }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Fax</strong>
 
-                            <p class="text-muted">{{ $mitra->fax_mitra }}</p>
+                            <p class="text-muted">{{ $mitraId->fax_mitra }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-pencil-alt mr-1"></i> Kabupaten</strong>
 
-                            <p class="text-muted"> {{ $mitra->kabupaten['nama'] }}
+                            <p class="text-muted"> {{ $mitraId->kabupaten['nama'] }}
                             </p>
                         </div>
                         <div class="form-group row">
                             <div class="offset-sm-5 ">
-                                <a class="btn btn-danger" href="{{ route('profile.edit', $mitra->id) }}">
+                                <a class="btn btn-danger" href="{{ route('profile.edit', $mitraId->id) }}">
                                     Ubah
                                 </a>
                             </div>

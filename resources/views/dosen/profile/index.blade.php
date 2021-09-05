@@ -1,4 +1,4 @@
-@extends('dosen.layout')
+Id@extends('dosen.layout')
 
 @section('title')
 Profile Dosen
@@ -33,33 +33,33 @@ Profile Dosen
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$dosen->foto_dosen) }}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$dosenId->foto_dosen) }}" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ $dosen->nama_dosen }}</h3>
+                            <h3 class="profile-username text-center">{{ $dosenId->nama_dosen }}</h3>
 
                             <p class="text-muted text-center">{{ Auth::user()->email }}</p>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                            <p class="text-muted">{{ $dosen->telepon_dosen }}</p>
+                            <p class="text-muted">{{ $dosenId->telepon_dosen }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> NIP</strong>
 
-                            <p class="text-muted">{{ $dosen->NIP }}</p>
+                            <p class="text-muted">{{ $dosenId->NIP }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Departemen</strong>
 
-                            <p class="text-muted">{{ $dosen->depart['nama_depart'] }}</p>
+                            <p class="text-muted">{{ $dosenId->depart['nama_depart'] }}</p>
 
                         </div>
                         <div class="form-group row">
                             <div class="offset-sm-5 ">
-                                <a class="btn btn-danger" href="{{ route('profile.edit', $dosen->id) }}">
+                                <a class="btn btn-danger" href="{{ route('profile.edit', $dosenId->id) }}">
                                     Ubah
                                 </a>
                             </div>

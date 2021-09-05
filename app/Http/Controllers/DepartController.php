@@ -20,8 +20,9 @@ class DepartController extends Controller
      */
     public function departLayout(){
         $depart = Departemen::where('user_id', Auth::id())->first();
-        return view('depart.layout', compact('depart'));
+        return $depart->foto_depart;
     }
+    
     public function countPengajuan(){
         $data = Magang::whereNull('dosen_id')
         ->get();
@@ -37,8 +38,8 @@ class DepartController extends Controller
         ->leftJoin('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mhs_id', $mhs->id)
         ->first();
-        $count = $this->countPengajuan();
-        return view('depart.mhs.show', compact('mhs', 'data', 'count', 'skill'));
+        $depart = $this->departLayout();
+        return view('depart.mhs.show', compact('mhs', 'data', 'depart', 'skill'));
     }
 
     public function listMhs()
@@ -47,13 +48,12 @@ class DepartController extends Controller
         $mhs = Mahasiswa::where('depart_id', $depart->id)
         ->orderBy('nama_mhs', 'asc')
         ->get();
-        $count = $this->countPengajuan();
-        return view('depart.mhs.index', compact('mhs', 'count'));
+        $depart = $this->departLayout();
+        return view('depart.mhs.index', compact('mhs', 'depart'));
     }
     
     public function departHome()
     {
-        $depart = Departemen::where("user_id", Auth::id())->first();
         $count = $this->countPengajuan();
         $user = $this->countUser();
         $mitra = $this->countMitra();
@@ -62,6 +62,7 @@ class DepartController extends Controller
         $mhs = $this->countMhs();
         $mhsMag = $this->countMhsMagang();
         $blmMag = $this->countBelumMagang();
+        $depart = $this->departLayout();
         return view('depart.home', compact('depart', 'count', 'user', 'mitra', 'spv', 'dosen', 'mhs', 'mhsMag', 'blmMag'));
     }
 

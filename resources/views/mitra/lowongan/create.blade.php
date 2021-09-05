@@ -70,7 +70,7 @@ Tambah Lowongan
                                 <input type="text" class="form-control" name="lokasi" placeholder="Lokasi sesuai Google Maps"/>
                             </div>
                             <div class="form-group">
-                                <input type="hidden" class="form-control" name="mitra_id" value="{{ $mitra->id }}">
+                                <input type="hidden" class="form-control" name="mitra_id" value="{{ $mitraId->id }}">
                             </div>
                             <div class="form-group">
                                 <label>Kategori</label>

@@ -71,7 +71,7 @@ Tambah Lowongan
                                 <input type="text" class="form-control" name="lokasi" value="{{ $low->lokasi }}" />
                             </div>
                             <div class="form-group">
-                                <input type="hidden" name="mitra_id" value="{{ $mitra->id }}">
+                                <input type="hidden" name="mitra_id" value="{{ $mitraId->id }}">
                             <div class="form-group">
                                 <label>Kategori</label>
                                 <select class="form-control" name="kategori_id">
