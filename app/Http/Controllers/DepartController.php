@@ -18,6 +18,10 @@ class DepartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function departLayout(){
+        $depart = Departemen::where('user_id', Auth::id())->first();
+        return view('depart.layout', compact('depart'));
+    }
     public function countPengajuan(){
         $data = Magang::whereNull('dosen_id')
         ->get();

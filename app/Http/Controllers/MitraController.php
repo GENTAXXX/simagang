@@ -15,6 +15,10 @@ class MitraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function mitraLayout(){
+        $mitra = Mitra::where('user_id', Auth::id())->first();
+        return view('mitra.layout', compact('mitra'));
+    }
     public function countPendaftar(){
         $data = Magang::where('approval', '0')
         ->whereNotNull('dosen_id')

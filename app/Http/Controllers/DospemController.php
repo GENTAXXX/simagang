@@ -15,6 +15,10 @@ class DospemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dospemLayout(){
+        $dosen = Dosen::where('user_id', Auth::id())->first();
+        return view('dosen.layout', compact('dosen'));
+    }
 
     public function dospemHome()
     {

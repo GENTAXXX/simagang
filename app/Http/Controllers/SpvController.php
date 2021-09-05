@@ -15,6 +15,11 @@ class SpvController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function spvLayout(){
+        $spv = Supervisor::where('user_id', Auth::id())->first();
+        return view('spv.layout', compact('spv'));
+    }
+
     public function supervisorHome()
     {
         $spv = Supervisor::where("user_id", Auth::id())->first();

@@ -17,6 +17,11 @@ class MhsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function mhsLayout(){
+        $mhs = Mahasiswa::where('user_id', Auth::id())->first();
+        dd($mhs);
+        return view('mhs.layout', compact('mhs'));
+    }
     public function mahasiswaHome()
     {
         $mhs = Mahasiswa::where("user_id", Auth::id())->first();
