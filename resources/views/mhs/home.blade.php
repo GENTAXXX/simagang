@@ -82,13 +82,13 @@ Dashboard
                     <!-- small card -->
                     <div class="small-box bg-danger">
                     <div class="inner">
-                        @if ($mhs->status_id == 1)
+                        @if ($mhsId->status_id == 1)
                             <h3>Belum Magang</h3>
-                        @elseif ($mhs->status_id == 2)
+                        @elseif ($mhsId->status_id == 2)
                             <h3>Sedang Magang</h3>
-                        @elseif ($mhs->status_id == 3)
+                        @elseif ($mhsId->status_id == 3)
                             <h3>Sedang Magang</h3>
-                        @elseif ($mhs->status_id == 4)
+                        @elseif ($mhsId->status_id == 4)
                             <h3>Sedang Mengajukan</h3>
                         @endif
 

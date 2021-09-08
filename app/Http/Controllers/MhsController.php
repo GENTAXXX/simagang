@@ -24,11 +24,12 @@ class MhsController extends Controller
 
     public function mahasiswaHome()
     {
+        $mhsId = Mahasiswa::where('user_id', Auth::id())->first();
         $ajukan = $this->countAjukan();
         $log = $this->countLogbook();
         $bim = $this->countBimbingan();
         $mhs = $this->mhsLayout();
-        return view('mhs.home', compact('mhs', 'ajukan', 'log', 'bim'));
+        return view('mhs.home', compact('mhs', 'ajukan', 'log', 'bim', 'mhsId'));
     }
 
     public function countAjukan(){

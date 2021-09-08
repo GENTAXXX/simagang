@@ -68,7 +68,7 @@ Profile Mahasiswa
                                         <select name="depart_id" class="form-control">
                                             <option value="">- Pilih Departemen -</option>
                                             @foreach($depart as $dep)
-                                            <option value="{{ $dep['id'] }}" @if ($mhs->depart_id == $dep->id) selected @endif>{{ $dep->nama_depart }}</option>
+                                            <option value="{{ $dep['id'] }}" @if ($mhsId->depart_id == $dep->id) selected @endif>{{ $dep->nama_depart }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -77,7 +77,7 @@ Profile Mahasiswa
                                         <select name="jurusan_id" class="form-control">
                                             <option value="">- Pilih Jurusan -</option>
                                             @foreach($jurusan as $jur)
-                                            <option value="{{ $jur['id'] }}" @if ($mhs->jurusan_id == $jur->id) selected @endif>{{ $jur->jurusan }}</option>
+                                            <option value="{{ $jur['id'] }}" @if ($mhsId->jurusan_id == $jur->id) selected @endif>{{ $jur->jurusan }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -94,7 +94,7 @@ Profile Mahasiswa
                                         <select name="jenis_kelamin" class="form-control">
                                             <option value="">- Pilih Jenis Kelamin -</option>
                                             @foreach($gender as $gender)
-                                            <option value="{{ $gender }}" @if ($mhs->jenis_kelamin == $gender) selected @endif>{{ $gender }}</option>
+                                            <option value="{{ $gender }}" @if ($mhsId->jenis_kelamin == $gender) selected @endif>{{ $gender }}</option>
                                             @endforeach
                                         </select>
                                     </div>

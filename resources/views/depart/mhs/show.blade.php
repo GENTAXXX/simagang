@@ -115,7 +115,9 @@ Detail Mahasiswa
                                             <label class="badge badge-warning">Sedang Mengajukan</label>
                                         @endif
                                         </td>
+                                        @if ($mhs->status_id == 3)
                                         <td class="text-center">{{ $data->updated_at }}</td>
+                                        @endif
                                     </tr>
                                     @endif
                                 </tbody>

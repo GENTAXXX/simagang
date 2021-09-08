@@ -46,7 +46,7 @@ class DepartController extends Controller
     {
         $depart = Departemen::where('user_id', Auth::id())->first();
         $mhs = Mahasiswa::where('depart_id', $depart->id)
-        ->orderBy('nama_mhs', 'asc')
+        ->orderBy('status_id', 'asc')
         ->get();
         $depart = $this->departLayout();
         return view('depart.mhs.index', compact('mhs', 'depart'));

@@ -227,6 +227,11 @@ class ApplyController extends Controller
             $magang->lowongan_id = $request->lowongan_id;
             $magang->save();
 
+            $mhs = Mahasiswa::find($magang->mhs_id);
+            $mhs->update([
+                'status_id' => '4'
+            ]);
+
             return redirect()->route('mahasiswa.home')->with('success', 'Lowongan berhasil diajukan!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Lowongan gagal diajukan!');

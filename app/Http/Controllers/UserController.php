@@ -158,6 +158,38 @@ class UserController extends Controller
         ]);
         
         $user->update($request->all());
+        switch ($user->role_id) {
+            case '1':
+                $depart = Departemen::where('user_id', $user->id)->first();
+                $depart->update([
+                    'nama_depart' => $user['name'],
+                ]);
+                break;
+            case '2':
+                $mitra = Mitra::where('user_id', $user->id)->first();
+                $mitra->update([
+                    'nama_mitra' => $user['name'],
+                ]);
+                break;
+            case '3':
+                $dosen = Dosen::where('user_id', $user->id)->first();
+                $dosen->update([
+                    'nama_dosen' => $user['name'],
+                ]);
+                break;
+            case '4':
+                $spv = Supervisor::where('user_id', $user->id)->first();
+                $spv->update([
+                    'nama_spv' => $user['name'],
+                ]);
+                break;
+            case '5':
+                $mhs = Mahasiswa::where('user_id', $user->id)->first();
+                $mhs->update([
+                    'nama_mhs' => $user['name'],
+                ]);
+                break;
+        }
         return redirect()->route('users.index')->with('success', 'Akun berhasil diubah!');
     }
 
