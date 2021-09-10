@@ -10,9 +10,9 @@ use App\Models\Role;
 use App\Models\Supervisor;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Magang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -53,12 +53,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'role_id' => 'required',
             'email' => 'required',
             'password' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
 
         $request = new Request($request->all());
 
@@ -151,11 +157,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'role_id' => 'required',
             'email' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
         
         $user->update($request->all());
         switch ($user->role_id) {

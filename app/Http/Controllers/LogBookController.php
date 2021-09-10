@@ -11,6 +11,7 @@ use App\Models\Supervisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Validator;
 
 class LogBookController extends Controller
 {
@@ -99,12 +100,18 @@ class LogBookController extends Controller
         ->select('magang.id as mag_id', 'magang.*', 'mahasiswa.*')
         ->first();
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'tanggal' => 'required',
             'kegiatan' => 'required',
             'deskripsi_log' => 'required',
             'saran' =>'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
 
         try {
             Logbook::create([

@@ -8,6 +8,7 @@ use App\Models\Kategori;
 use App\Models\Mitra;
 use App\Models\Magang;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class LowonganController extends Controller
 {
@@ -59,7 +60,7 @@ class LowonganController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_low' => 'required',
             'deskripsi_low' => 'required',
             'telepon_low' => 'required',
@@ -75,6 +76,12 @@ class LowonganController extends Controller
         $request->foto_low->move(public_path('images'), $imageName);
 
         $mitra = Mitra::where('user_id', Auth::id())->first();
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
 
         try {
             Lowongan::create([
@@ -129,7 +136,7 @@ class LowonganController extends Controller
      */
     public function update(Request $request, Lowongan $lowongan)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_low' => 'required',
             'deskripsi_low' => 'required',
             'telepon_low' => 'required',
@@ -139,6 +146,12 @@ class LowonganController extends Controller
             'kategori_id' => 'required',
             'lokasi' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
 
         try {
             $lowongan->update($request->all());

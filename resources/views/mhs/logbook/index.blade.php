@@ -114,11 +114,11 @@ Logbook
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="tanggal">Tanggal</label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal">
+                                <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ old('tanggal') }}">
                             </div>
                             <div class="form-group">
                                 <label for="kegiatan">Kegiatan</label>
-                                <input type="text" class="form-control" id="kegiatan" placeholder="Kegiatan" name="kegiatan">
+                                <input type="text" class="form-control" id="kegiatan" placeholder="Kegiatan" name="kegiatan" value="{{ old('kegiatan') }}">
                             </div>
                             <div class="form-group">
                                 <label for="deskripsi_log">Deskripsi</label>
@@ -126,7 +126,7 @@ Logbook
                             </div>
                             <div class="form-group">
                                 <label for="saran">Saran</label>
-                                <input type="text" class="form-control" id="saran" name="saran" placeholder="Saran">
+                                <input type="text" class="form-control" id="saran" name="saran" placeholder="Saran" value="{{ old('saran') }}">
                             </div>
                         </div>
                         <div class="card-footer">

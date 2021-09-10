@@ -116,7 +116,7 @@ Bimbingan
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="tgl_bimbingan">Tanggal Bimbingan</label>
-                                <input type="date" class="form-control" id="tgl_bimbingan" name="tgl_bimbingan">
+                                <input type="date" class="form-control" id="tgl_bimbingan" name="tgl_bimbingan" value="{{ old('tgl_bimbingan') }}">
                             </div>
                             <div class="form-group">
                                 <label for="catatan">Catatan</label>
@@ -124,7 +124,7 @@ Bimbingan
                             </div>
                             <div class="form-group">
                                 <label for="file">File Bimbingan</label>
-                                <input type="file" class="form-control" id="file" name="file">
+                                <input type="file" class="form-control" id="file" name="file" value="{{ old('file') }}">
                             </div>
                         </div>
                         <div class="card-footer">

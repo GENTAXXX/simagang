@@ -52,15 +52,15 @@ Tambah User
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nama User:</label>
-                                <input type="text" class="form-control" name="name" autofocus placeholder="Nama User"/>
+                                <input type="text" class="form-control" name="name" autofocus placeholder="Nama User" value="{{ old('name') }}"/>
                             </div>
                             <div class=" form-group">
                                 <label>Email User:</label>
-                                <input type="email" class="form-control" name="email" placeholder="Email User"/>
+                                <input type="email" class="form-control" name="email" placeholder="Email User" value="{{ old('email') }}"/>
                             </div>
                             <div class=" form-group">
                                 <label>Role:</label>
-                                <select class="form-control" name="role_id">
+                                <select class="form-control" name="role_id" >
                                     <option value="">- Pilih Role -</option>
                                     @foreach ($role as $role)
                                     <option value="{{ $role->id }}">{{ $role->role }}</option>

@@ -12,9 +12,9 @@ use App\Models\Skill;
 use App\Models\SkillMhs;
 use App\Models\Supervisor;
 use App\Models\User;
-use App\Models\Magang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -179,13 +179,19 @@ class ProfileController extends Controller
         switch ($user->role_id) {
             case '1':
                 $depart = Departemen::where("user_id", $idUserLogin)->first();
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                     'nama_depart' => 'required',
                     'alamat_depart' => 'required',
                     'telepon_depart' => 'required',
                     'NIDN' => 'required',
                     'foto_depart' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
+        
+                if ($validator->fails()) {
+                    return redirect()->back()
+                        ->with('errorForm', $validator->errors()->getMessages())
+                        ->withInput();
+                }
 
                 if ($request->foto_depart){
                     $imageName = $request->nama_depart . '.' . $request->foto_depart->extension();
@@ -232,7 +238,7 @@ class ProfileController extends Controller
                 }
             case '2':
                 $mitra = Mitra::where("user_id", $idUserLogin)->first();
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                     'nama_mitra' => 'required',
                     'alamat_mitra' => 'required',
                     'telepon_mitra' => 'required',
@@ -240,6 +246,12 @@ class ProfileController extends Controller
                     'foto_mitra' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'kab_id' => 'required',
                 ]);
+        
+                if ($validator->fails()) {
+                    return redirect()->back()
+                        ->with('errorForm', $validator->errors()->getMessages())
+                        ->withInput();
+                }
 
                 if ($request->foto_mitra){
                     $imageName = $request->nama_mitra . '.' . $request->foto_mitra->extension();
@@ -288,13 +300,19 @@ class ProfileController extends Controller
                 }
             case '3':
                 $dosen = Dosen::where("user_id", $idUserLogin)->first();
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                     'nama_dosen' => 'required',
                     'telepon_dosen' => 'required',
                     'NIP' => 'required',
                     'foto_dosen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'depart_id' => 'required',
                 ]);
+        
+                if ($validator->fails()) {
+                    return redirect()->back()
+                        ->with('errorForm', $validator->errors()->getMessages())
+                        ->withInput();
+                }
 
                 if ($request->foto_dosen){
                     $imageName = $request->nama_dosen . '.' . $request->foto_dosen->extension();
@@ -341,13 +359,19 @@ class ProfileController extends Controller
                 }
             case '4':
                 $spv = Supervisor::where("user_id", $idUserLogin)->first();
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                     'nama_spv' => 'required',
                     'telepon_spv' => 'required',
                     'no_pegawai' => 'required',
                     'foto_spv' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'mitra_id' => 'required',
                 ]);
+        
+                if ($validator->fails()) {
+                    return redirect()->back()
+                        ->with('errorForm', $validator->errors()->getMessages())
+                        ->withInput();
+                }
 
                 if ($request->foto_spv){
                     $imageName = $request->nama_spv . '.' . $request->foto_spv->extension();
@@ -395,7 +419,7 @@ class ProfileController extends Controller
                 
             case '5':
                 $mhs = Mahasiswa::where("user_id", $idUserLogin)->first();
-                $request->validate([
+                $validator = Validator::make($request->all(), [
                     'nama_mhs' => 'required',
                     'NIM' => 'required',
                     'telepon_mhs' => 'required',
@@ -406,6 +430,12 @@ class ProfileController extends Controller
                     'foto_mhs' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'depart_id' => 'required'
                 ]);
+        
+                if ($validator->fails()) {
+                    return redirect()->back()
+                        ->with('errorForm', $validator->errors()->getMessages())
+                        ->withInput();
+                }
 
                 foreach ($request->skill_id as $skill){
                     SkillMhs::updateOrCreate([

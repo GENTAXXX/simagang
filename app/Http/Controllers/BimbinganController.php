@@ -10,6 +10,7 @@ use App\Models\Mahasiswa;
 use App\Models\Magang;
 use App\Models\Lowongan;
 use App\Models\SkillMhs;
+use Illuminate\Support\Facades\Validator;
 
 class BimbinganController extends Controller
 {
@@ -119,7 +120,7 @@ class BimbinganController extends Controller
         ->select('magang.id as mag_id', 'magang.*', 'mahasiswa.*')
         ->first();
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'catatan' => 'required',
             'tgl_bimbingan' => 'required',
             'file' => 'required',
@@ -127,6 +128,12 @@ class BimbinganController extends Controller
 
         $fileName = 'Bimbingan' . $request->tgl_bimbingan . time() . '.' . $request->file->extension();
         $request->file->move(public_path('file'), $fileName);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
 
         try {
             Bimbingan::create([

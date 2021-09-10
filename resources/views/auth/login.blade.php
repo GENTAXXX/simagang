@@ -10,7 +10,7 @@ Login
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <img src="assets/img/sim-green.png" class="img-fluid p-4" alt="">
+            <img src="{{ asset('assets/img/sim-green.png') }}" class="img-fluid p-4" alt="">
         </div>
         <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>

@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -42,10 +43,16 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with('errorForm', $validator->errors()->getMessages())
+                ->withInput();
+        }
 
         $credentials = request(['email', 'password']);
         if (Auth::attempt($credentials)) {
@@ -61,8 +68,8 @@ class LoginController extends Controller
             } else if ($user->role_id == 5) {
                 return redirect()->route('mahasiswa.home');
             }
-        } else {
-            return redirect()->route('login')->with('error','Alamat email dan password tidak sesuai!');
         }
+        return back()->with('error', 'Alamat email dan password tidak sesuai!');
+        
     }
 }
