@@ -22,7 +22,7 @@ class DospemController extends Controller
 
     public function dospemHome()
     {
-        $dosen = Dosen::where("user_id", Auth::id())->first();
+        $dosen = $this->dospemLayout();
         $mhsBim = $this->countMhsBim();
         $feedback = $this->countBim();
         return view('dosen.home', compact('dosen', 'mhsBim', 'feedback'));

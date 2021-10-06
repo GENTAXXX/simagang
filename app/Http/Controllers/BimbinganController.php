@@ -126,14 +126,14 @@ class BimbinganController extends Controller
             'file' => 'required',
         ]);
 
-        $fileName = 'Bimbingan' . $request->tgl_bimbingan . time() . '.' . $request->file->extension();
-        $request->file->move(public_path('file'), $fileName);
-
         if ($validator->fails()) {
             return redirect()->back()
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
+
+        $fileName = 'Bimbingan' . $request->tgl_bimbingan . time() . '.' . $request->file->extension();
+        $request->file->move(public_path('file'), $fileName);
 
         try {
             Bimbingan::create([

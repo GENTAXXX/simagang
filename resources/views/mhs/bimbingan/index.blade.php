@@ -124,7 +124,7 @@ Bimbingan
                             </div>
                             <div class="form-group">
                                 <label for="file">File Bimbingan</label>
-                                <input type="file" class="form-control" id="file" name="file" value="{{ old('file') }}">
+                                <input type="file" class="form-control" id="file" name="file">
                             </div>
                         </div>
                         <div class="card-footer">

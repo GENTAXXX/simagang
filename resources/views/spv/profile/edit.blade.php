@@ -43,33 +43,33 @@ Edit Profile
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal" action="{{ route('profile.update', $spv->id) }}" method="POST" enctype="multipart/form-data">
+                                <form class="form-horizontal" action="{{ route('profile.update', $spvId->id) }}" method="POST" enctype="multipart/form-data">
                                     @method('PATCH')
                                     @csrf
                                     <div class="form-group">
                                         <label for="nama">Nama:</label>
-                                        <input type="text" class="form-control" name="nama_spv" value="{{ $spv->nama_spv }}" />
+                                        <input type="text" class="form-control" name="nama_spv" value="{{ $spvId->nama_spv }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="telepon">Telepon:</label>
-                                        <input type="number" class="form-control" name="telepon_spv" value="{{ $spv->telepon_spv }}" />
+                                        <input type="number" class="form-control" name="telepon_spv" value="{{ $spvId->telepon_spv }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="no_pegawai">No. Pegawai:</label>
-                                        <input type="number" class="form-control" name="no_pegawai" value="{{ $spv->no_pegawai }}" />
+                                        <input type="number" class="form-control" name="no_pegawai" value="{{ $spvId->no_pegawai }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="mitra_id">Mitra:</label>
                                         <select class="form-control" name="mitra_id">
                                             <option value="">- Pilih Mitra -</option>
                                             @foreach ($mitra as $mit)
-                                            <option value="{{ $mit->id }}" @if ($spv->mitra_id == $mit->id) selected @endif>{{ $mit->nama_mitra }}</option>
+                                            <option value="{{ $mit->id }}" @if ($spvId->mitra_id == $mit->id) selected @endif>{{ $mit->nama_mitra }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto_spv" value="{{ $spv->foto_spv }}" />
+                                        <input type="file" class="form-control" name="foto_spv" value="{{ $spvId->foto_spv }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

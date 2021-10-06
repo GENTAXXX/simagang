@@ -1,4 +1,4 @@
-Id@extends('dosen.layout')
+@extends('dosen.layout')
 
 @section('title')
 Profile Dosen
