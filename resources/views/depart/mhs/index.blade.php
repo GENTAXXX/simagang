@@ -31,7 +31,7 @@ Daftar Mahasiswa
         <div class="card">
 
             <div class="card-body table-responsive p-6">
-                <table id="mhs" class="table table-striped table-valign-middle">
+                <table id="mhs" class="table table-valign-middle">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>

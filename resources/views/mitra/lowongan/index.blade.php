@@ -1,7 +1,7 @@
 @extends('mitra.layout')
 
 @section('title')
-Daftar Lowongan
+Lowongan
 @endsection
 
 @section('konteng')

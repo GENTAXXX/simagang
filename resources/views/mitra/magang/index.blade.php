@@ -1,7 +1,7 @@
 @extends('mitra.layout')
 
 @section('title')
-Daftar Mahasiswa Magang
+Mahasiswa Magang
 @endsection
 
 @section('konteng')

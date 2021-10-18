@@ -189,12 +189,8 @@ class ApplyController extends Controller
         ->find($id);
 
         $mhs = Mahasiswa::where('user_id', Auth::id())
-        ->get();
-        $button = 'enable';
-        if (isset($mhs->status_id) == '2'){
-            $button = 'disabled';
-        };
-        return view('lowongan.detail', compact('low', 'button'));
+        ->first();
+        return view('lowongan.detail', compact('low', 'mhs'));
     }
     
     public function index()

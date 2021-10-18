@@ -59,7 +59,7 @@ Edit Profile
                                         <select class="form-control" name="kab_id">
                                             <option value="">- Pilih Kabupaten -</option>
                                             @foreach ($kabupatens as $kabupaten)
-                                                    <option value="{{ $kabupaten->id }}" @if ($mitra->kab_id == $kabupaten->id) selected @endif>{{ $kabupaten->nama }}</option>
+                                                    <option value="{{ $kabupaten->id }}" @if ($mitraId->kab_id == $kabupaten->id) selected @endif>{{ $kabupaten->nama }}</option>
                                             @endforeach
                                         </select>
                                     </div>

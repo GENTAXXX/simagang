@@ -12,16 +12,15 @@ Tambah Lowongan
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">Buat Lowongan</h1>
-
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ url('mitra/home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Pengajuan Proposal Dosen Pembimbing</li>
+                        <li class="breadcrumb-item active">Buat Lowongan</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.content-header -->
 
@@ -35,17 +34,6 @@ Tambah Lowongan
                     <div class="card-header">
                         <h3 class="card-title">Buat Lowongan</h3>
                     </div>
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div><br />
-                    @endif
-                    <!-- /.card-header -->
-                    <!-- form start -->
                     <form action="{{ route('lowongan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
@@ -55,7 +43,7 @@ Tambah Lowongan
                             </div>
                             <div class=" form-group">
                                 <label>Deskripsi Lowongan</label>
-                                <textarea class="form-control" name="deskripsi_low" style="height:150px"placeholder="Deskripsi Lowongan"></textarea>
+                                <textarea class="form-control" name="deskripsi_low" style="height:150px" placeholder="Deskripsi Lowongan"></textarea>
                             </div>
                             <div class=" form-group">
                                 <label>Jumlah Mahasiswa</label>

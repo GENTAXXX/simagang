@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Lowongan;
 use App\Models\Kategori;
 use App\Models\Mitra;
-use App\Models\Magang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -72,16 +71,16 @@ class LowonganController extends Controller
             'foto_low' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = $request->nama_low . '.' . $request->foto_low->extension();
-        $request->foto_low->move(public_path('images'), $imageName);
-
-        $mitra = Mitra::where('user_id', Auth::id())->first();
-
         if ($validator->fails()) {
             return redirect()->back()
                 ->with('errorForm', $validator->errors()->getMessages())
                 ->withInput();
         }
+
+        $imageName = $request->nama_low . '.' . $request->foto_low->extension();
+        $request->foto_low->move(public_path('images'), $imageName);
+
+        $mitra = Mitra::where('user_id', Auth::id())->first();
 
         try {
             Lowongan::create([

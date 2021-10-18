@@ -49,15 +49,15 @@ Edit Profile
                                         <label for="NIP">NIP:</label>
                                         <input type="number" class="form-control" name="NIP" value="{{ $dosenId->NIP }}" />
                                     </div>
-                                    <!-- <div class="form-group">
+                                    <div class="form-group">
                                         <label for="depart_id">Departemen:</label>
                                         <select class="form-control" name="depart_id">
                                             <option value="">- Pilih Departemen -</option>
                                             @foreach ($depart as $dep)
-                                            <option value="{{ $dep->id }}" @if ($dosen->depart_id == $dep->id) selected @endif>{{ $dep->nama_depart }}</option>
+                                            <option value="{{ $dep->id }}" @if ($dosenId->depart_id == $dep->id) selected @endif>{{ $dep->nama_depart }}</option>
                                             @endforeach
                                         </select>
-                                    </div> -->
+                                    </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
                                         <input type="file" class="form-control" name="foto_dosen" value="{{ $dosenId->foto_dosen }}" />

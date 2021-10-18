@@ -77,11 +77,13 @@ Detail Lowongan
                             </div>
                         </div>             
                     </form>
+                    @if ($mhs->status_id != 2)
                     <div>
                         <a href="{{ route('lowongan.apply', $low->id) }}">
-                            <button type="submit" class="btn btn-primary" {{ $button }}> Apply</button>
+                            <button type="submit" class="btn btn-primary"> Apply</button>
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

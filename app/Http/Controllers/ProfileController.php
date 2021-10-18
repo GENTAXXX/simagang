@@ -136,12 +136,12 @@ class ProfileController extends Controller
             case '2':
                 $mitraId = Mitra::where("user_id", $idUserLogin)->first();
                 $kabupatens = Kabupaten::all();
-                $count = $this->mitraLayout();
+                $mitra = $this->mitraLayout();
                 return view('mitra.profile.edit', compact('mitraId', 'kabupatens', 'mitra'));
                 break;
             case '3':
                 $dosenId = Dosen::where("user_id", $idUserLogin)->first();
-                $depart = Departemen::where('id', $dosenId->depart_id);
+                $depart = Departemen::where('id', $dosenId->depart_id)->get();
                 $dosen = $this->dospemLayout();
                 return view('dosen.profile.edit', compact('dosenId', 'depart', 'dosen'));
                 break;
