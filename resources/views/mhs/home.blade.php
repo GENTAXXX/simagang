@@ -87,7 +87,7 @@ Dashboard
                         @elseif ($mhsId->status_id == 2)
                             <h3>Sedang Magang</h3>
                         @elseif ($mhsId->status_id == 3)
-                            <h3>Sedang Magang</h3>
+                            <h3>Sudah Magang</h3>
                         @elseif ($mhsId->status_id == 4)
                             <h3>Sedang Mengajukan</h3>
                         @endif

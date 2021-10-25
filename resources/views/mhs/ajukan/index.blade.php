@@ -47,8 +47,9 @@ Lowongan Diajukan
                                     <th class="text-center">Nomor</th>
                                     <th class="text-center">Lowongan</th>
                                     <th class="text-center">Mitra</th>
+                                    <th class="text-center">Nilai</th>
+                                    <th class="text-center">Keterangan</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,6 +59,8 @@ Lowongan Diajukan
                                     <td class="text-center">{{ $no++ }}</a></td>
                                     <td class="text-center">{{ $data->nama_low }}</td>
                                     <td class="text-center">{{ $data->lowongan->mitra['nama_mitra'] }}</td>
+                                    <td class="text-center">{{ $data->nilai }}</td>
+                                    <td class="text-center">{{ $data->keterangan }}</td>
                                     <td class="text-center">
                                         @if ($data->approval == 1)
                                             <label class="badge badge-success">Diterima</label>
@@ -68,9 +71,6 @@ Lowongan Diajukan
                                         @elseif ($data->approval == 'null')
                                             <label class="badge badge-warning">Menunggu</label>
                                         @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ url('mitra/pendaftar', $data->magang_id) }}" class="btn btn-primary">Lihat</a>
                                     </td>
                                 </tr>
                                 @endforeach
